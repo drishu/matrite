@@ -1,0 +1,7 @@
+{
+    "require": {
+        "twbs/bootstrap": "4.0.0-beta.3",
+        "components/jquery": "^3.2",
+        "klein/klein": "^2.1"
+    }
+}
