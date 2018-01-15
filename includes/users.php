@@ -5,7 +5,7 @@ class Users {
 		$post = $request->paramsPost();
 		$email = $post->email;
 		$password = md5($post->password);
-		
+
 		if ($stmt = $app->db->prepare("SELECT id FROM users WHERE email = ? and password = ? LIMIT 1")) {
 			$stmt->bind_param('ss', $email, $password);
 	        $user = $stmt->execute();

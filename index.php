@@ -83,6 +83,14 @@ $klein->respond('/index', function ($request, $response, $service, $app) {
 });
 
 // Mold CRUD
+$klein->respond('GET', '/mold', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$service->render('views/mold.phtml');
+});
+
 $klein->respond('GET', '/add-mold', function ($request, $response, $service, $app) {
 	if (!$app->isLogged) {
 		$response->redirect(BASE_PATH)->send();

@@ -7,51 +7,51 @@
 	    <tbody>
 	      <tr>
 	        <td>Denumier reper:</td>
-	        <td><b>Pall ring 15</b></td>
+	        <td><b><input type="text" name="denumire_reper"></b></td>
 	        <td colspan="2">&nbsp;</td>
 	      </tr>
 	      <tr>
 	        <td>Cod reper:</td>
-	        <td>&nbsp;</td>
+	        <td> <input type="text" name="cod_reper"> </td>
 	        <td>Cantitate:</td>
-	        <td>242000 buc/mc</td>
+	        <td><input type="text" name="cantitate"> buc/mc</td>
 	      </tr>
 	      <tr>
 	        <td>Cod matrita:</td>
-	        <td>&nbsp;</td>
+	        <td> <input type="text" name="cod_matrita"> </td>
 	        <td>Ciclu inj PP:</td>
-	        <td>9 sec</td>
+	        <td><input type="text" name="ciclu_inj"> sec</td>
 	      </tr>
 	      <tr>
 	        <td>Nr. de cuiburi:</td>
-	        <td>8</td>
+	        <td><input type="text" name="nr_cuiburi"></td>
 	        <td colspan="2">&nbsp;</td>
 	      </tr>
 	      <tr>
 	        <td>Greutate culee[g]:</td>
-	        <td>-</td>
+	        <td><input type="text" name="greutate_culee"></td>
 	        <td colspan="2">&nbsp;</td>
 	      </tr>
 	      <tr>
 	        <td>Greutate reper fara culee[g]:</td>
-	        <td>0.46</td>
+	        <td><input type="text" name="greutate_fara_cule"></td>
 	        <td>Dim. matrita [h x l x L]:</td>
 	        <td>&nbsp;</td>
 	      </tr>
 	      <tr>
 	        <td>Dimensiuni reper [mm x mm]:</td>
-	        <td>15x15</td>
-	        <td colspan="2">350x160</td>
+	        <td><input type="text" name="dimensiuni_reper"></td>
+	        <td colspan="2"><input type="text" name="dim_matrita_h"> h</td>
 	      </tr>
 	      <tr>
 	        <td>Numar rezistente</td>
-	        <td>10</td>
-	        <td colspan="2">350x160</td>
+	        <td><input type="text" name="numar_rezistente"></td>
+	        <td colspan="2"><input type="text" name="dim_matrita_lat"> l</td>
 	      </tr>
 	      <tr>
 	        <td>Diametru inel de centrare:</td>
-	        <td>110</td>
-	        <td colspan="2">&nbsp;</td>
+	        <td><input type="text" name="diametru_inel_centrare"></td>
+	        <td colspan="2"><input type="text" name="dim_matrita_lung"> L</td>
 	      </tr>
 	    </tbody>
 	  </table>
@@ -61,22 +61,22 @@
 	      <tr>
 	        <td><b>Pregatire matrita:</b>
 	        	<div class="radio">
-				  <label><input type="radio" name="optradio">ungere coloane</label>
+				  <label><input type="radio" name="pregatire_matrita">ungere coloane</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">modif. poanson data</label>
+				  <label><input type="radio" name="pregatire_matrita">modif. poanson data</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">modif. poanson material</label>
+				  <label><input type="radio" name="pregatire_matrita">modif. poanson material</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">verificat duza calda</label>
+				  <label><input type="radio" name="pregatire_matrita">verificat duza calda</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">verificat functionare bacuri</label>
+				  <label><input type="radio" name="pregatire_matrita">verificat functionare bacuri</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">verificat pozitie bacuri</label>
+				  <label><input type="radio" name="pregatire_matrita">verificat pozitie bacuri</label>
 				</div>
 	        </td>
 	        <td>&nbsp;</td>
@@ -84,16 +84,16 @@
 	      <tr>
 	        <td><b>Demontare matrita de pe masina:</b>
 	        	<div class="radio">
-				  <label><input type="radio" name="optradio">Verificat ultima injectie</label>
+				  <label><input type="radio" name="demontare_matrita_masina">Verificat ultima injectie</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">verificat pozitie bacuri</label>
+				  <label><input type="radio" name="demontare_matrita_masina">verificat pozitie bacuri</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">suflat aer comprimat</label>
+				  <label><input type="radio" name="demontare_matrita_masina">suflat aer comprimat</label>
 				</div>
 				<div class="radio">
-				  <label><input type="radio" name="optradio">conservat matrit</label>
+				  <label><input type="radio" name="demontare_matrita_masina">conservat matrit</label>
 				</div>
 				</div>
 	        </td>
@@ -117,16 +117,16 @@
       	  </tr>
       	  <tr>
       	  	<td>1</td>
-      	  	<td>&nbsp;</td>
-      	  	<td>&nbsp;</td>
-      	  	<td>&nbsp;</td>
+      	  	<td><input type="text" name="cuib1"></td>
+      	  	<td><input type="text" name="legaturi_rezistetnte_a1"></td>
+      	  	<td><input type="text" name="legaturi_rezistetnte_b1"></td>
       	  	<td>&nbsp;</td>
       	  	<td>&nbsp;</td>
       	  	<td>&nbsp;</td>
       	  </tr>
       	  <tr>
       	  	<td>2</td>
-      	  	<td>&nbsp;</td>
+      	  	<td><input type="text" name="cuib2"></td>
       	  	<td>&nbsp;</td>
       	  	<td>&nbsp;</td>
       	  	<td>&nbsp;</td>
