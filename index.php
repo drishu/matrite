@@ -99,6 +99,20 @@ $klein->respond('GET', '/add-mold', function ($request, $response, $service, $ap
 	$service->render('views/add-mold.phtml');
 });
 
+// Users CRUD
+$klein->respond('GET', '/users', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+    $controller->list_users($service, $app);
+
+	$service->render('views/users.phtml');
+});
+
 // Page not found.
 $klein->respond('/404', function ($request, $response, $service) {
 	$service->render('views/404.phtml');
