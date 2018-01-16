@@ -12,8 +12,8 @@ if (APPLICATION_ENV == 'production') {
 }
 else {
 	define("HOST", "localhost");
-	define("USER", "root");
-	define("PASSWORD", "");
+	define("USER", "myuser");
+	define("PASSWORD", "andras");
 	define("DATABASE", "matrite");
 }
 

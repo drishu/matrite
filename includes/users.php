@@ -8,7 +8,7 @@ class Users {
 
 		if ($stmt = $app->db->prepare("SELECT id FROM users WHERE email = ? and password = ? LIMIT 1")) {
 			$stmt->bind_param('ss', $email, $password);
-	        $user = $stmt->execute();
+	        $stmt->execute();
 	        $stmt->store_result();
 
 	        // get variables from result.
@@ -27,5 +27,27 @@ class Users {
 	
 	public function logout() {
 		unset($_SESSION['user_id']);
+	}
+
+	public function list_users(&$service, &$app) {
+		if ($stmt = $app->db->prepare("SELECT * FROM users")) {
+	        $stmt->execute();
+	        $result = $stmt->get_result();
+
+	        if ($result->num_rows > 0) {
+	        	$user_list = array();
+
+	        	while ($row = $result->fetch_assoc()) {
+	        		$user_list[] = $row;
+        		}
+
+        		$service->users = $user_list;
+	        	
+	        	$stmt->free_result();
+	        	unset($users);
+	        }
+	    }
+
+	    return FALSE;
 	}
 }
