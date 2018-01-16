@@ -1,10 +1,12 @@
   <div class="table-responsive container">
+      <a href="<?= BASE_PATH?>/add-user" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
+
     <table class="table table-striped">
       <thead>
         <tr>
           <th>#</th>
           <th>Email</th>
-          <th>&nbsp;</th>
+          <th colspan="2">&nbsp;</th>
         </tr>
       </thead>
       <tbody>
@@ -12,7 +14,8 @@
         <tr>
           <td><?= ($key + 1)?></td>
           <td><?= $user['email']?></td>
-          <td><a href="#">Edit</a></td>
+          <td><a href="<?= BASE_PATH?>/edit-user/<?= $user['id']?>">Edit</a></td>
+          <td><a href="<?= BASE_PATH?>/delete-user/<?= $user['id']?>">Sterge</a></td>
         </tr>
         <?php endforeach?>
       </tbody>

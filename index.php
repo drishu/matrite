@@ -113,6 +113,96 @@ $klein->respond('GET', '/users', function ($request, $response, $service, $app) 
 	$service->render('views/users.phtml');
 });
 
+$klein->respond('GET', '/edit-user/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+	$user = $controller->getUser($id, $service, $app);
+    
+	$service->render('views/edit-user.phtml');
+});
+
+$klein->respond('GET', '/add-user', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+    
+	$service->render('views/add-user.phtml');
+});
+
+$klein->respond('POST', '/add-user', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+	$result = $controller->addUser($request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/users')->send();	
+	}
+    
+	$service->render('views/add-user.phtml');
+});
+
+$klein->respond('POST', '/edit-user/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+	$result = $controller->editUser($id, $request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/users')->send();	
+	}
+    
+	$service->render('views/edit-user.phtml');
+});
+
+$klein->respond('GET', '/delete-user/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+	$result = $controller->deleteUser($id, $request, $service, $app);
+
+	$response->redirect(BASE_PATH.'/users')->send();
+});
+
 // Page not found.
 $klein->respond('/404', function ($request, $response, $service) {
 	$service->render('views/404.phtml');
