@@ -10,10 +10,16 @@ if (APPLICATION_ENV == 'production') {
 	define("PASSWORD", "eKcGZr59zAa2BEWU");
 	define("DATABASE", "secure_login");
 }
-else {
+if (APPLICATION_ENV == 'andras') {
 	define("HOST", "localhost");
 	define("USER", "myuser");
 	define("PASSWORD", "andras");
+	define("DATABASE", "matrite");
+}
+if (APPLICATION_ENV == 'adi') {
+	define("HOST", "localhost");
+	define("USER", "root");
+	define("PASSWORD", "");
 	define("DATABASE", "matrite");
 }
 
