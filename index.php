@@ -99,6 +99,23 @@ $klein->respond('GET', '/add-mold', function ($request, $response, $service, $ap
 	$service->render('views/add-mold.phtml');
 });
 
+$klein->respond('POST', '/add-mold', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/molds.php';
+
+	$controller = new Molds();
+	$result = $controller->addMold($request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/molds')->send();	
+	}
+    
+	$service->render('views/add-mold.phtml');
+});
+
 // Users CRUD
 $klein->respond('GET', '/users', function ($request, $response, $service, $app) {
 	if (!$app->isLogged) {
