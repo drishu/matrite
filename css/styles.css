@@ -35,3 +35,14 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+/* Cards */
+table.card {
+  width: 100%;
+}
+table.odd {
+  background: #eee;
+}
+table.card td,
+table.card th {
+  padding:5px 35px 5px 35px;
+}
