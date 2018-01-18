@@ -31,7 +31,7 @@ $klein->respond(function ($request, $response, $service, $app) use ($klein) {
 	$app->isLogged = (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) ? TRUE : FALSE;
 
 	if ($app->isLogged) {
-		$service->layout('views/layout.phtml');	
+		$service->layout('views/layout-in.phtml');	
 	}
 	else {
 		$service->layout('views/layout-out.phtml');		
@@ -108,7 +108,7 @@ $klein->respond('GET', '/users', function ($request, $response, $service, $app) 
 	require_once __DIR__ . '/includes/users.php';
 
 	$controller = new Users();
-    $controller->list_users($service, $app);
+    $controller->listUsers($service, $app);
 
 	$service->render('views/users.phtml');
 });
@@ -130,35 +130,6 @@ $klein->respond('GET', '/edit-user/[i:id]', function ($request, $response, $serv
 	$user = $controller->getUser($id, $service, $app);
     
 	$service->render('views/edit-user.phtml');
-});
-
-$klein->respond('GET', '/add-user', function ($request, $response, $service, $app) {
-	if (!$app->isLogged) {
-		$response->redirect(BASE_PATH)->send();
-	}
-
-	require_once __DIR__ . '/includes/users.php';
-
-	$controller = new Users();
-    
-	$service->render('views/add-user.phtml');
-});
-
-$klein->respond('POST', '/add-user', function ($request, $response, $service, $app) {
-	if (!$app->isLogged) {
-		$response->redirect(BASE_PATH)->send();
-	}
-
-	require_once __DIR__ . '/includes/users.php';
-
-	$controller = new Users();
-	$result = $controller->addUser($request, $service, $app);
-
-	if ($result) {
-		$response->redirect(BASE_PATH.'/users')->send();	
-	}
-    
-	$service->render('views/add-user.phtml');
 });
 
 $klein->respond('POST', '/edit-user/[i:id]', function ($request, $response, $service, $app) {
@@ -184,6 +155,31 @@ $klein->respond('POST', '/edit-user/[i:id]', function ($request, $response, $ser
 	$service->render('views/edit-user.phtml');
 });
 
+$klein->respond('GET', '/add-user', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+    
+	$service->render('views/add-user.phtml');
+});
+
+$klein->respond('POST', '/add-user', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/users.php';
+
+	$controller = new Users();
+	$result = $controller->addUser($request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/users')->send();	
+	}
+    
+	$service->render('views/add-user.phtml');
+});
+
 $klein->respond('GET', '/delete-user/[i:id]', function ($request, $response, $service, $app) {
 	if (!$app->isLogged) {
 		$response->redirect(BASE_PATH)->send();
@@ -201,6 +197,106 @@ $klein->respond('GET', '/delete-user/[i:id]', function ($request, $response, $se
 	$result = $controller->deleteUser($id, $request, $service, $app);
 
 	$response->redirect(BASE_PATH.'/users')->send();
+});
+
+// Material CRUD
+$klein->respond('GET', '/materials', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/materials.php';
+
+	$controller = new Materials();
+    $controller->listMaterials($service, $app);
+
+	$service->render('views/materials.phtml');
+});
+
+$klein->respond('GET', '/add-material', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+    
+	$service->render('views/add-material.phtml');
+});
+
+$klein->respond('POST', '/add-material', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	require_once __DIR__ . '/includes/materials.php';
+
+	$controller = new Materials();
+	$result = $controller->addMaterial($request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/materials')->send();	
+	}
+    
+	$service->render('views/add-material.phtml');
+});
+
+$klein->respond('GET', '/edit-material/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/materials.php';
+
+	$controller = new Materials();
+	$material = $controller->getMaterial($id, $service, $app);
+    
+	$service->render('views/edit-material.phtml');
+});
+
+$klein->respond('POST', '/edit-material/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/materials.php';
+
+	$controller = new Materials();
+	$result = $controller->editMaterial($id, $request, $service, $app);
+
+	if ($result) {
+		$response->redirect(BASE_PATH.'/materials')->send();	
+	}
+    
+	$service->render('views/edit-material.phtml');
+});
+
+$klein->respond('GET', '/delete-material/[i:id]', function ($request, $response, $service, $app) {
+	if (!$app->isLogged) {
+		$response->redirect(BASE_PATH)->send();
+	}
+
+	$id = $request->param('id', FALSE);
+
+	if (!$id) {
+		$response->redirect(BASE_PATH)->send();	
+	}
+
+	require_once __DIR__ . '/includes/materials.php';
+
+	$controller = new Materials();
+	$result = $controller->deleteMaterial($id, $request, $service, $app);
+
+	$response->redirect(BASE_PATH.'/materials')->send();
 });
 
 // Page not found.

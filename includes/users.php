@@ -29,7 +29,7 @@ class Users {
 		unset($_SESSION['user_id']);
 	}
 
-	public function list_users(&$service, &$app) {
+	public function listUsers(&$service, &$app) {
 		if ($stmt = $app->db->prepare("SELECT * FROM users")) {
 	        $stmt->execute();
 	        $result = $stmt->get_result();

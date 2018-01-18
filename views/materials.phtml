@@ -1,0 +1,29 @@
+  <div class="table-responsive container">
+      <a href="<?= BASE_PATH?>/add-material" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
+
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Nume</th>
+          <th colspan="2">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+      <?php if (!empty($this->materials)):?>
+        <?php foreach ($this->materials as $key => $material):?>
+        <tr>
+          <td><?= ($key + 1)?></td>
+          <td><?= $material['name']?></td>
+          <td><a href="<?= BASE_PATH?>/edit-material/<?= $material['id']?>">Edit</a></td>
+          <td><a href="<?= BASE_PATH?>/delete-material/<?= $material['id']?>">Sterge</a></td>
+        </tr>
+        <?php endforeach?>
+      <?php else:?>
+        <tr>
+          <td colspan="4">Nu sunt materiale</td>
+        </tr>
+      <?php endif?>
+      </tbody>
+    </table>
+  </div>
