@@ -110,7 +110,7 @@ $klein->respond('POST', '/add-mold', function ($request, $response, $service, $a
 	$result = $controller->addMold($request, $service, $app);
 
 	if ($result) {
-		$response->redirect(BASE_PATH.'/molds')->send();	
+		$response->redirect(BASE_PATH.'/mold')->send();	
 	}
     
 	$service->render('views/add-mold.phtml');
