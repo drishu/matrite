@@ -1,9 +1,15 @@
 <?php
 
+/**
+ * Here we bootstrap the application and route.
+ *
+ * PHP version 5.6
+ */
+
 $base  = dirname($_SERVER['PHP_SELF']);
 
 // Update request when we have a subdirectory
-if(ltrim($base, '/')) { 
+if (ltrim($base, '/')) {
     $_SERVER['REQUEST_URI'] = substr($_SERVER['REQUEST_URI'], strlen($base));
 }
 
@@ -31,12 +37,12 @@ $klein->respond(
         $service->startSession();
 
         // Show login or ?
-        $app->isLogged = (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) ? true : false;
+        $condition = isset($_SESSION['user_id']) && !empty($_SESSION['user_id']);
+        $app->isLogged = ($condition) ? true : false;
 
         if ($app->isLogged) {
             $service->layout('views/layout-in.phtml');    
-        }
-        else {
+        } else {
             $service->layout('views/layout-out.phtml');        
         }
     
