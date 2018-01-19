@@ -75,14 +75,27 @@ class Users {
 	public function editUser($id, &$request, &$service, &$app) {
 		$post = $request->paramsPost();
 		$email = $post->email;
-		$password = md5($post->password);
 
-		if ($stmt = $app->db->prepare("UPDATE users SET email = ?, password = ? WHERE id = ?")) {
-			$stmt->bind_param('ssd', $email, $password, $id);
-			$stmt->execute();
-			$stmt->close();
+		// If no password is set then we leave it be
+		if (empty($post->password)) {
+			if ($stmt = $app->db->prepare("UPDATE users SET email = ? WHERE id = ?")) {
+				$stmt->bind_param('si', $email, $id);
+				$stmt->execute();
+				$stmt->close();
 
-			return TRUE;
+				return TRUE;
+			}
+		}
+		else {
+			$password = md5($post->password);
+
+			if ($stmt = $app->db->prepare("UPDATE users SET email = ?, password = ? WHERE id = ?")) {
+				$stmt->bind_param('ssi', $email, $password, $id);
+				$stmt->execute();
+				$stmt->close();
+
+				return TRUE;
+			}
 		}
 
 		return FALSE;
@@ -106,7 +119,7 @@ class Users {
 
 	public function deleteUser($id, &$request, &$service, &$app) {
 		if ($stmt = $app->db->prepare("DELETE FROM users WHERE id = ?")) {
-			$stmt->bind_param('d', $id);
+			$stmt->bind_param('i', $id);
 			$stmt->execute();
 			$stmt->close();
 

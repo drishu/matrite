@@ -64,7 +64,7 @@ class Materials {
 		$name = $post->name;
 
 		if ($stmt = $app->db->prepare("UPDATE materials SET name = ? WHERE id = ?")) {
-			$stmt->bind_param('sd', $name, $id);
+			$stmt->bind_param('si', $name, $id);
 			$stmt->execute();
 			$stmt->close();
 
@@ -76,7 +76,7 @@ class Materials {
 
 	public function deleteMaterial($id, &$request, &$service, &$app) {
 		if ($stmt = $app->db->prepare("DELETE FROM materials WHERE id = ?")) {
-			$stmt->bind_param('d', $id);
+			$stmt->bind_param('i', $id);
 			$stmt->execute();
 			$stmt->close();
 
