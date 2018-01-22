@@ -14,9 +14,9 @@
             <div class="form-group">
               <label for="material" class="text-white">Material:</label>
               <select class="form-control" id="material" name="material" multiple>
-                <option>PP</option>
-                <option>PPS</option>
-                <option>XYZ</option>
+			  <?php foreach ($this->materials as $key => $material):?>
+				<option value="<?= $material['id']?>"><?= $material['name']?></option>
+				<?php endforeach?>
               </select>
             </div>
             <div class="form-group">
