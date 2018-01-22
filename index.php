@@ -55,7 +55,10 @@ $klein->respond(
         if ($app->isLogged) {
             $response->redirect('index');
         }
-    
+        
+        // Any login error ?
+        $service->messages = $service->flashes();
+
         $service->render('views/sign-in.phtml');
     }
 );
@@ -67,6 +70,9 @@ $klein->respond(
         $controller = new Users();
         if ($controller->login($request,  $app)) {
             $response->redirect('index');
+        } else {
+            $service->flash('datele introduse nu sunt corecte.', 'alert-danger');
+            $service->back();
         }
 
         $service->render('views/sign-in.phtml');

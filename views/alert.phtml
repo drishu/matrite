@@ -1,0 +1,12 @@
+<?php if ($this->messages):?>
+<section role="messages">
+  <?php foreach ($this->messages as $class => $messages):?>
+  	<?php foreach ($messages as $message):?>
+  	<div class="alert <?= $class?> alert-dismissable fade show">
+  	  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  	  <strong>Atentie!</strong> <?= $message?>
+  	</div>
+  	<?php endforeach?>
+  <?php endforeach?>
+</section>
+<?php endif?>

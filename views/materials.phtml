@@ -1,29 +1,52 @@
-  <div class="table-responsive container">
-      <a href="<?= BASE_PATH?>/add-material" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
+<div class="table-responsive container">
+    <a href="<?= BASE_PATH?>/add-material" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Nume</th>
-          <th colspan="2">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-      <?php if (!empty($this->materials)):?>
-        <?php foreach ($this->materials as $key => $material):?>
-        <tr>
-          <td><?= ($key + 1)?></td>
-          <td><?= $material['name']?></td>
-          <td><a href="<?= BASE_PATH?>/edit-material/<?= $material['id']?>">Edit</a></td>
-          <td><a href="<?= BASE_PATH?>/delete-material/<?= $material['id']?>">Sterge</a></td>
-        </tr>
-        <?php endforeach?>
-      <?php else:?>
-        <tr>
-          <td colspan="4">Nu sunt materiale</td>
-        </tr>
-      <?php endif?>
-      </tbody>
-    </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Nume</th>
+        <th colspan="2">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+    <?php if (!empty($this->materials)):?>
+      <?php foreach ($this->materials as $key => $material):?>
+      <tr>
+        <td><?= ($key + 1)?></td>
+        <td><?= $material['name']?></td>
+        <td><a href="<?= BASE_PATH?>/edit-material/<?= $material['id']?>">Edit</a></td>
+        <td><a href="#" data-toggle="modal" data-target="#modal-<?= $material['id']?>">Sterge</a></td>
+      </tr>
+      <?php endforeach?>
+    <?php else:?>
+      <tr>
+        <td colspan="4">Nu sunt materiale</td>
+      </tr>
+    <?php endif?>
+    </tbody>
+  </table>
+</div>
+<!-- Modals -->
+<?php if (!empty($this->materials)):?>
+<?php foreach ($this->materials as $key => $material):?>
+<div class="modal fade" id="modal-<?= $material['id']?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Sunte-ti sigur ?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">       
+        <a class="btn btn-success" href="<?= BASE_PATH?>/delete-material/<?= $material['id']?>">Da</a>
+        sau
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+      </div>
+    
+    </div>
   </div>
+</div>
+<?php endforeach?>
+<?php endif?>
