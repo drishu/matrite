@@ -1,23 +1,46 @@
-  <div class="table-responsive container">
-      <a href="<?= BASE_PATH?>/add-user" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
+<div class="table-responsive container">
+    <a href="<?= BASE_PATH?>/add-user" class="btn btn-outline-success my-2 my-sm-0">Adauga</a>
 
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>#</th>
-          <th>Email</th>
-          <th colspan="2">&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <?php foreach ($this->users as $key => $user):?>
-        <tr>
-          <td><?= ($key + 1)?></td>
-          <td><?= $user['email']?></td>
-          <td><a href="<?= BASE_PATH?>/edit-user/<?= $user['id']?>">Edit</a></td>
-          <td><a href="<?= BASE_PATH?>/delete-user/<?= $user['id']?>">Sterge</a></td>
-        </tr>
-        <?php endforeach?>
-      </tbody>
-    </table>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Email</th>
+        <th colspan="2">&nbsp;</th>
+      </tr>
+    </thead>
+    <tbody>
+      <?php foreach ($this->users as $key => $user):?>
+      <tr>
+        <td><?= ($key + 1)?></td>
+        <td><?= $user['email']?></td>
+        <td><a href="<?= BASE_PATH?>/edit-user/<?= $user['id']?>">Edit</a></td>
+        <td><a href="#" data-toggle="modal" data-target="#modal-<?= $user['id']?>">Sterge</a></td>
+      </tr>
+      <?php endforeach?>
+    </tbody>
+  </table>
+</div>
+<!-- Modals -->
+<?php if (!empty($this->users)):?>
+<?php foreach ($this->users as $key => $users):?>
+<div class="modal fade" id="modal-<?= $users['id']?>">
+  <div class="modal-dialog">
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Sunte-ti sigur ?</h4>
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+      </div>
+      
+      <div class="modal-body">       
+        <a class="btn btn-success" href="<?= BASE_PATH?>/delete-user/<?= $users['id']?>">Da</a>
+        sau
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Nu</button>
+      </div>
+    
+    </div>
   </div>
+</div>
+<?php endforeach?>
+<?php endif?>

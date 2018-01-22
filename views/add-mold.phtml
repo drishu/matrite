@@ -1,238 +1,251 @@
-<div class="container jumbotron">
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-lg-2">&nbsp;</div>
+  	<div class="col-lg-8">
+	  <form class="form-addmold" method="post">
+	    <h2 class="form-addmold-heading">Date matrita</h2>
 
-  <form class="form-addmold" method="post">
-    <h2 class="form-addmold-heading">Date matrita</h2>
-
-    <table class="table table-bordered">
-	    <tbody>
-	      <tr>
-	        <td>Denumier reper:</td>
-	        <td><b><input type="text" name="denumire_reper"></b></td>
-	        <td colspan="2">&nbsp;</td>
-	      </tr>
-	      <tr>
-	        <td>Cod reper:</td>
-	        <td> <input type="text" name="cod_reper"> </td>
-	        <td>Cantitate:</td>
-	        <td><input type="text" name="cantitate"> buc/mc</td>
-	      </tr>
-	      <tr>
-	        <td>Cod matrita:</td>
-	        <td> <input type="text" name="cod_matrita"> </td>
-	        <td>Ciclu inj PP:</td>
-	        <td><input type="text" name="ciclu_inj"> sec</td>
-	      </tr>
-	      <tr>
-	        <td>Nr. de cuiburi:</td>
-	        <td><input type="text" name="nr_cuiburi"></td>
-	        <td colspan="2">&nbsp;</td>
-	      </tr>
-	      <tr>
-	        <td>Greutate culee[g]:</td>
-	        <td><input type="text" name="greutate_culee"></td>
-	        <td colspan="2">&nbsp;</td>
-	      </tr>
-	      <tr>
-	        <td>Greutate reper fara culee[g]:</td>
-	        <td><input type="text" name="greutate_fara_cule"></td>
-	        <td>Dim. matrita [h x l x L]:</td>
-	        <td>&nbsp;</td>
-	      </tr>
-	      <tr>
-	        <td>Dimensiuni reper [mm x mm]:</td>
-	        <td><input type="text" name="dimensiuni_reper"></td>
-	        <td colspan="2"><input type="text" name="dim_matrita_h"> h</td>
-	      </tr>
-	      <tr>
-	        <td>Numar rezistente</td>
-	        <td><input type="text" name="numar_rezistente"></td>
-	        <td colspan="2"><input type="text" name="dim_matrita_lat"> l</td>
-	      </tr>
-	      <tr>
-	        <td>Diametru inel de centrare:</td>
-	        <td><input type="text" name="diametru_inel_centrare"></td>
-	        <td colspan="2"><input type="text" name="dim_matrita_lung"> L</td>
-	      </tr>
-	    </tbody>
-	  </table>
-
-	  <table class="table table-bordered">
-	    <tbody>
-	      <tr>
-	        <td><b>Pregatire matrita:</b>
-	        	<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">ungere coloane</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">modif. poanson data</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">modif. poanson material</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">verificat duza calda</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">verificat functionare bacuri</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="pregatire_matrita">verificat pozitie bacuri</label>
-				</div>
-	        </td>
-	        <td>&nbsp;</td>
-	      </tr>
-	      <tr>
-	        <td><b>Demontare matrita de pe masina:</b>
-	        	<div class="radio">
-				  <label><input type="radio" name="demontare_matrita_masina">Verificat ultima injectie</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="demontare_matrita_masina">verificat pozitie bacuri</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="demontare_matrita_masina">suflat aer comprimat</label>
-				</div>
-				<div class="radio">
-				  <label><input type="radio" name="demontare_matrita_masina">conservat matrit</label>
-				</div>
-				</div>
-	        </td>
-	        <td><b><u>Observatii</u></b><br>
-			<textarea name="observatii" rows="4" cols="50">
-
-            </textarea>
-			</td>
-	      </tr>
-      	</tbody>
-	  </table>
-
-	  <table class="table table-bordered">
-	    <tbody>
-	      <tr>
-	      	<td rowspan="2">Rezistente</td>
-	      	<td rowspan="2">Cuiburi</td>
-	      	<td colspan="2" rowspan="2">Legaturi rezistente</td>
-	      	<td colspan="2">legaturi sonde</td>
-	      	<td rowspan="2">&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>+</td>
-      	  	<td>-</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>1</td>
-      	  	<td><input type="text" name="cuib1"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a1"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b1"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a1"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b1"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>2</td>
-      	  	<td><input type="text" name="cuib2"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a2"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b2"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a2"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b2"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>3</td>
-      	  	<td><input type="text" name="cuib3"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a3"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b3"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a3"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b3"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>4</td>
-      	  	<td><input type="text" name="cuib4"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a4"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b4"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a4"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b4"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>5</td>
-      	  	<td><input type="text" name="cuib5"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a5"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b5"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a5"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b5"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>6</td>
-      	  	<td><input type="text" name="cuib6"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a6"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b6"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a6"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b6"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>7</td>
-      	  	<td><input type="text" name="cuib7"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a7"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b7"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a7"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b7"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>8</td>
-      	  	<td><input type="text" name="cuib8"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a8"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b8"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a8"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b8"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>9</td>
-      	  	<td><input type="text" name="cuib9"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a9"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b9"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a9"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b9"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	  <tr>
-      	  	<td>10</td>
-      	  	<td><input type="text" name="cuib10"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_a10"></td>
-      	  	<td><input type="text" name="legaturi_rezistente_b10"></td>
-      	  	<td><input type="text" name="legaturi_sonde_a10"></td>
-      	  	<td><input type="text" name="legaturi_sonde_b10"></td>
-      	  	<td>&nbsp;</td>
-      	  </tr>
-      	</tbody>
-	  </table>
-	  
-	  <table class="table table-bordered">
-	    <tbody>
-	      <tr>
-			<td>1 Rezistente cuib</td>
-			<td><input type="text" name="rezistenta_cuib_tc"> TC</td>
-			<td><input type="text" name="rezistenta_cuib_buc"> buc</td>
-  	  	  </tr>
-  	  	  <tr>
-			<td>2 Rezistenta centrala</td>
-			<td><input type="text" name="rezistenta_centrala_tc"> TC</td>
-			<td><input type="text" name="rezistenta_centrala_buc"> buc</td>
-  	  	  </tr>
-  	  	  <tr>
-			<td>3 rezistenta bloc</td>
-			<td><input type="text" name="rezistenta_bloc_tc"> TC</td>
-			<td><input type="text" name="rezistenta_bloc_buc"> buc</td>
-  	  	  </tr>
-      	</tbody>
-	  </table>
-	  <p>inel O 6x2</p>
-	  <button class="btn btn-lg btn-primary btn-block" type="submit">Salveaza</button>
-  </form>
-
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <tbody>
+		      <tr>
+		        <td>Denumier reper:</td>
+		        <td><b><input type="text" class="form-control input-sm" name="denumire_reper"></b></td>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Cod reper:</td>
+		        <td> <input type="text" class="form-control input-sm" name="cod_reper"> </td>
+		        <td>Cantitate:</td>
+		        <td><input type="text" class="form-control input-sm" name="cantitate"> buc/mc</td>
+		      </tr>
+		      <tr>
+		        <td>Cod matrita:</td>
+		        <td> <input type="text" class="form-control input-sm" name="cod_matrita"> </td>
+		        <td>Ciclu inj PP:</td>
+		        <td><input type="text" class="form-control input-sm" name="ciclu_inj"> sec</td>
+		      </tr>
+		      <tr>
+		        <td>Nr. de cuiburi:</td>
+		        <td><input type="text" class="form-control input-sm" name="nr_cuiburi"></td>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Greutate culee[g]:</td>
+		        <td><input type="text" class="form-control input-sm" name="greutate_culee"></td>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Greutate reper fara culee[g]:</td>
+		        <td><input type="text" class="form-control input-sm" name="greutate_fara_cule"></td>
+		        <td>Dim. matrita [h x l x L]:</td>
+		        <td>&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Dimensiuni reper [mm x mm]:</td>
+		        <td><input type="text" class="form-control input-sm" name="dimensiuni_reper"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="dim_matrita_h">
+			        	<span class="input-group-addon ml-1">h</span>
+		        	</div>
+		        </td>
+		      </tr>
+		      <tr>
+		        <td>Numar rezistente</td>
+		        <td><input type="text" class="form-control input-sm" name="numar_rezistente"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+		        		<input type="text" class="form-control input-sm" name="dim_matrita_lat">
+		        		<span class="input-group-addon ml-1">l</span>
+		        	</td>
+		      </tr>
+		      <tr>
+		        <td>Diametru inel de centrare:</td>
+		        <td><input type="text" class="form-control input-sm" name="diametru_inel_centrare"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+		        		<input type="text" class="form-control input-sm" name="dim_matrita_lung">
+		        		<span class="input-group-addon ml-1">L</span>
+		        	</td>
+		      </tr>
+		    </tbody>
+		  </table>
+	  	</div>
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <tbody>
+		      <tr>
+		        <td><b>Pregatire matrita:</b>
+		        	<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> ungere coloane</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> modif. poanson data</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> modif. poanson material</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> verificat duza calda</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> verificat functionare bacuri</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="pregatire_matrita"> verificat pozitie bacuri</label>
+					</div>
+		        </td>
+		        <td>&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td><b>Demontare matrita de pe masina:</b>
+		        	<div class="radio">
+					  <label><input type="radio" name="demontare_matrita_masina"> Verificat ultima injectie</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="demontare_matrita_masina"> verificat pozitie bacuri</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="demontare_matrita_masina"> suflat aer comprimat</label>
+					</div>
+					<div class="radio">
+					  <label><input type="radio" name="demontare_matrita_masina"> conservat matrit</label>
+					</div>
+		        </td>
+		        <td><b><u>Observatii</u></b><br>
+		        	<div class="form-group">
+						<textarea class="form-control" name="observatii" rows="4" cols="50"></textarea>
+					</div>
+				</td>
+		      </tr>
+	      	</tbody>
+		  </table>
+	    </div>
+	    <div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <thead class="thead-light">
+		      <tr>
+		        <th rowspan="2"">Rezistente</th>
+		        <th rowspan="2">Cuiburi</th>
+		        <th colspan="2" rowspan="2">Legaturi rezistente</th>
+		        <th colspan="2">legaturi sonde</th>
+		      </tr>
+		      <tr>
+		        <th>+</th>
+		        <th>-</th>
+	          </tr>
+	  	    </thead>
+	  	    <tbody>
+	      	  <tr>
+	      	  	<td>1</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib1"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a1"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b1"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a1"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b1"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>2</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib2"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a2"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b2"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a2"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b2"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>3</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib3"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a3"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b3"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a3"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b3"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>4</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib4"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a4"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b4"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a4"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b4"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>5</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib5"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a5"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b5"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a5"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b5"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>6</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib6"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a6"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b6"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a6"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b6"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>7</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib7"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a7"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b7"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a7"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b7"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>8</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib8"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a8"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b8"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a8"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b8"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>9</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib9"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a9"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b9"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a9"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b9"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>10</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib10"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a10"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b10"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a10"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b10"></td>
+	      	  </tr>
+	      	</tbody>
+		  </table>
+		</div>
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <tbody>
+		      <tr>
+				<td>1 Rezistente cuib</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_cuib_tc"> TC</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_cuib_buc"> buc</td>
+	  	  	  </tr>
+	  	  	  <tr>
+				<td>2 Rezistenta centrala</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_centrala_tc"> TC</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_centrala_buc"> buc</td>
+	  	  	  </tr>
+	  	  	  <tr>
+				<td>3 rezistenta bloc</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_bloc_tc"> TC</td>
+				<td><input type="text" class="form-control input-sm" name="rezistenta_bloc_buc"> buc</td>
+	  	  	  </tr>
+	      	</tbody>
+		  </table>
+		</div>
+	    <p>inel O 6x2</p>
+	    <button class="btn btn-lg btn-primary btn-block w-25 float-right" type="submit">Salveaza</button>
+	  </form>
+	</div>
+	</div>
+	<div class="col-lg-2">&nbsp;</div>
+  </div>
 </div>
