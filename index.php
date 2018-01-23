@@ -101,6 +101,11 @@ $klein->respond(
         if (!$app->isLogged) {
             $response->redirect(BASE_PATH)->send();
         }
+		
+		include_once __DIR__ . '/includes/materials.php';
+
+        $controller = new Materials();
+        $controller->listMaterials($service, $app);
 
         // Load products.
         include_once __DIR__ . '/includes/molds.php';
