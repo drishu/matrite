@@ -6,6 +6,7 @@
       <tr>
         <th>#</th>
         <th>Nume</th>
+        <th>Factor de multiplicare</th>
         <th colspan="2">&nbsp;</th>
       </tr>
     </thead>
@@ -15,6 +16,7 @@
       <tr>
         <td><?= ($key + 1)?></td>
         <td><?= $material['name']?></td>
+        <td><?= $material['factor']?></td>
         <td><a href="<?= BASE_PATH?>/edit-material/<?= $material['id']?>">Edit</a></td>
         <td><a href="#" data-toggle="modal" data-target="#modal-<?= $material['id']?>">Sterge</a></td>
       </tr>

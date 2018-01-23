@@ -2,7 +2,7 @@
 
 class Molds
 {
-    public function addMold(&$request, &$service, &$app) 
+    public function addMold(&$request, &$app) 
     {
         $post = $request->paramsPost();
         $denumire_reper = $post->denumire_reper;
@@ -26,5 +26,26 @@ class Molds
         }
 
         return false;
+    }
+
+    public function listMolds(&$request, &$app) {
+        if ($stmt = $app->db->prepare("SELECT * FROM molds")) {
+            $stmt->execute();
+            $result = $stmt->get_result();
+
+            if ($result->num_rows > 0) {
+                $list = array();
+
+                while ($row = $result->fetch_assoc()) {
+                    $list[] = $row;
+                }
+                
+                $stmt->free_result();
+                
+                return $list;
+            }
+        }
+
+        return array();
     }
 }

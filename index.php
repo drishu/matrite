@@ -102,6 +102,12 @@ $klein->respond(
             $response->redirect(BASE_PATH)->send();
         }
 
+        // Load products.
+        include_once __DIR__ . '/includes/molds.php';
+
+        $controller = new Molds();
+        $service->molds = $controller->listMolds($request, $app);
+
         $service->render('views/index.phtml');
     }
 );
@@ -136,7 +142,7 @@ $klein->respond(
         include_once __DIR__ . '/includes/molds.php';
 
         $controller = new Molds();
-        $result = $controller->addMold($request, $service, $app);
+        $result = $controller->addMold($request, $app);
 
         if ($result) {
             $response->redirect(BASE_PATH.'/mold')->send();    

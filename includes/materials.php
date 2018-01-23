@@ -29,9 +29,10 @@ class Materials
     {
         $post = $request->paramsPost();
         $name = $post->name;
+        $factor = $post->factor;
 
-        if ($stmt = $app->db->prepare("INSERT INTO materials (name) VALUES (?)")) {
-            $stmt->bind_param('s', $name);
+        if ($stmt = $app->db->prepare("INSERT INTO materials (name,factor) VALUES (?,?)")) {
+            $stmt->bind_param('sd', $name, $factor);
             $stmt->execute();
             $stmt->close();
 
@@ -67,9 +68,10 @@ class Materials
     {
         $post = $request->paramsPost();
         $name = $post->name;
+        $factor = $post->factor;
 
-        if ($stmt = $app->db->prepare("UPDATE materials SET name = ? WHERE id = ?")) {
-            $stmt->bind_param('si', $name, $id);
+        if ($stmt = $app->db->prepare("UPDATE materials SET name = ?, factor = ? WHERE id = ?")) {
+            $stmt->bind_param('ssi', $name, $factor, $id);
             $stmt->execute();
             $stmt->close();
 
