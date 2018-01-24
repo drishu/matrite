@@ -134,6 +134,10 @@ $klein->respond(
             $response->redirect(BASE_PATH)->send();
         }
 
+        include_once __DIR__ . '/includes/materials.php';
+        $controller = new Materials();
+        $controller->listMaterials($service, $app);
+
         $service->render('views/add-mold.phtml');
     }
 );
@@ -156,6 +160,17 @@ $klein->respond(
         $service->render('views/add-mold.phtml');
     }
 );
+
+$klein->respond(
+    'GET', '/edit-mold/[i:id]', function ($request, $response, $service, $app) {
+        if (!$app->isLogged) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        $service->render('views/add-mold.phtml');
+    }
+);
+
 
 // Users CRUD
 $klein->respond(

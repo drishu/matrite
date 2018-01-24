@@ -15,9 +15,9 @@
             <div class="form-group">
               <label for="material" class="text-white">Material:</label>
               <select class="form-control" id="material" name="material" multiple>
-			  <?php foreach ($this->materials as $key => $material):?>
-				<option value="<?= $material['id']?>"><?= $material['name']?></option>
-				<?php endforeach?>
+        			  <?php foreach ($this->materials as $key => $material):?>
+        				<option value="<?= $material['id']?>"><?= $material['name']?></option>
+        				<?php endforeach?>
               </select>
             </div>
             <div class="form-group">
@@ -49,7 +49,7 @@
           <thead class="thead-light">
             <tr>
               <th>Produs</th>
-              <th colspan="4"><?= $mold['denumire_reper']?></th>
+              <th colspan="4"><a href="<?= BASE_PATH?>/edit-mold/<?= $mold['id']?>"><?= $mold['denumire_reper']?></a></th>
             </tr>
           </thead>
           <tbody>
@@ -118,7 +118,7 @@
             </tr>
             <tr>
               <td>Nr cuiburi/matrita</td>
-              <td class="bg-warning">6</td>
+              <td><?= $mold['nr_cuiburi']?></td>
               <td>E-TFE</td>
               <td class="bg-warning">121</td>
               <td class="bg-warning">3.67</td>
