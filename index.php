@@ -103,9 +103,16 @@ $klein->respond(
         }
 		
 		include_once __DIR__ . '/includes/materials.php';
+		include_once __DIR__ . '/includes/molds.php';
 
-        $controller = new Materials();
-        $controller->listMaterials($service, $app);
+        $materials = new Materials();
+        $materials->listMaterials($service, $app);
+		
+		$molds = new Molds();
+		$list = $molds->order($app);
+		echo '<pre>';
+		print_r($list);
+		echo '</pre>';
 
         $service->render('views/index.phtml');
     }
