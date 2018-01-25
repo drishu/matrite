@@ -111,6 +111,11 @@ $klein->respond(
 
         $controller = new Molds();
         $service->molds = $controller->listMolds($materials, $request, $app);
+		$list = $molds->order($app);
+		echo '<pre>';
+		print_r($list);
+		echo '</pre>';
+
 
         $service->render('views/index.phtml');
     }
