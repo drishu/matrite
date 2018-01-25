@@ -185,27 +185,19 @@ $klein->respond(
         $id = $request->param('id', false);
 
         if (!$id) {
-            $response->redirect(BASE_PATH)->send();    
+            $response->redirect(BASE_PATH)->send();
         }
 
         include_once __DIR__ . '/includes/molds.php';
 
         $controller = new Molds();
-        $result = $controller->updateMold($id, $request, $app);
+        $result = $controller->updateMold($id, $request, $service, $app);
 
         if ($result) {
             $service->flash('Matrita a fost modificata cu succes.', 'alert-success');
-            $service->back();
         }
 
-        // Load product.
-        $service->mold = $controller->getMold($id, $app);
-
-        include_once __DIR__ . '/includes/materials.php';
-        $materials = new Materials();
-        $service->materials = $materials->listMaterials($app);
-
-        $service->render('views/edit-mold.phtml');
+        $response->redirect(BASE_PATH . '/edit-mold/' . $id)->send();
     }
 );
 
