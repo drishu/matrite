@@ -10,7 +10,7 @@
               <input type="text" class="form-control" id="denumire_reper" name="denumire_reper" placeholder="Produs">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="cod_reper" name="cod_reper" placeholder="Cod produs">
+              <input type="text" class="form-control" id="cod_matrita" name="cod_matrita" placeholder="Cod produs">
             </div>
             <div class="form-group">
               <label for="material" class="text-white">Material:</label>
@@ -42,6 +42,8 @@
       <!-- EOF Filtre -->
     </div>
     <div class="col-lg-8">
+      <!-- Messaje -->
+      <?php $this->partial('views/alert.phtml')?>
       <!-- Produse -->
       <?php foreach ($this->molds as $mold):?>
       <div class="table-responsive rounded">
@@ -55,81 +57,165 @@
           <tbody>
             <tr>
               <td>Cod produs</td>
-              <td><?= $mold['cod_reper']?></td>
+              <td><?= $mold['cod_matrita']?></td>
               <td>&nbsp;</td>
               <td>Kg/mc</td>
               <td>g/buc</td>
             </tr>
             <tr>
               <td>Material</td>
-              <td class="bg-warning">PP</td>
-              <td>PP</td>
+              <td><?= $mold['material']['name']?></td>
+            <?php 
+            if (isset($this->materials[0])):
+              $materialName = $this->materials[0]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
-              <td><?= $mold['greutate_fara_cule']?></td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Greutate  Kg/mc</td>
-              <td class="bg-warning">55</td>
-              <td>PP GF</td>
-              <td class="bg-warning">66</td>
-              <td class="bg-warning">2.00</td>
+              <td><?= round($mold['greutate'])?></td>
+            <?php 
+              if (isset($this->materials[1])):
+                $materialName = $this->materials[1]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Productie 24h</td>
               <td class="bg-warning">1.2</td>
-              <td>PES</td>
-              <td class="bg-warning">101.75</td>
-              <td class="bg-warning">3.08</td>
+            <?php 
+            if (isset($this->materials[2])):
+              $materialName = $this->materials[2]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Greutate /buc</td>
               <td><?= $mold['greutate_fara_cule']?></td>
-              <td>PPS</td>
-              <td class="bg-warning">99</td>
-              <td class="bg-warning">3.00</td>
+            <?php 
+            if (isset($this->materials[3])):
+              $materialName = $this->materials[3]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>TimpInjectie [sec]</td>
               <td><?= $mold['ciclu_inj']?></td>
-              <td>PVDF</td>
-              <td class="bg-warning">110</td>
-              <td class="bg-warning">3.33</td>
+            <?php 
+            if (isset($this->materials[4])):
+              $materialName = $this->materials[4]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
-              <td>MasinaTip</td>
-              <td class="bg-warning">&nbsp;</td>
-              <td>FEP</td>
-              <td class="bg-warning">132</td>
-              <td class="bg-warning">4.00</td>
+              <td>Masina tip</td>
+              <td><?= $mold['cod_reper']?></td>
+            <?php 
+            if (isset($this->materials[5])):
+              $materialName = $this->materials[5]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Buc/mc</td>
               <td><?= $mold['cantitate']?></td>
-              <td>PFA</td>
-              <td class="bg-warning">132</td>
-              <td class="bg-warning">4.00</td>
+            <?php 
+            if (isset($this->materials[6])):
+              $materialName = $this->materials[6]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Nr Matrita</td>
               <td class="bg-warning">&nbsp;</td>
-              <td>E-CTFE</td>
-              <td class="bg-warning">108.35</td>
-              <td class="bg-warning">3.28</td>
+            <?php 
+            if (isset($this->materials[7])):
+              $materialName = $this->materials[7]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Nr cuiburi/matrita</td>
               <td><?= $mold['nr_cuiburi']?></td>
-              <td>E-TFE</td>
-              <td class="bg-warning">121</td>
-              <td class="bg-warning">3.67</td>
-            </tr>
-            <tr>
+            <?php 
+            if (isset($this->materials[8])):
+              $materialName = $this->materials[8]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
-              <td>NDPE</td>
-              <td class="bg-warning">60.5</td>
-              <td class="bg-warning">1.83</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
+            <?php for ($i = 9; $i < $this->materialsCount; $i++):?>
+              <?php $materialName = $this->materials[$i]['name']?>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            </tr>
+            <?php endfor?>
           </tbody>
         </table>
       </div>

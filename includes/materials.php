@@ -2,7 +2,7 @@
 
 class Materials
 {
-    public function listMaterials(&$service, &$app) 
+    public function listMaterials(&$app) 
     {
         if ($stmt = $app->db->prepare("SELECT * FROM materials")) {
             $stmt->execute();
@@ -14,11 +14,10 @@ class Materials
                 while ($row = $result->fetch_assoc()) {
                     $list[] = $row;
                 }
-
-                $service->materials = $list;
                 
                 $stmt->free_result();
-                unset($list);
+                
+                return $list;
             }
         }
 
@@ -42,7 +41,7 @@ class Materials
         return false;
     }
 
-    public function getMaterial($id, &$service, &$app) 
+    public function getMaterial($id, &$app) 
     {
         if ($stmt = $app->db->prepare("SELECT * FROM materials WHERE id = ?")) {
             $stmt->bind_param('i', $id);
@@ -53,11 +52,10 @@ class Materials
                 $item = array();
 
                 if ($item = $result->fetch_assoc()) {
-                    $service->material = $item;    
+                    return $item;    
                 }
                 
                 $stmt->free_result();
-                unset($item);
             }
         }
 

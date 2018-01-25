@@ -1,0 +1,312 @@
+<div class="container-fluid">
+  <div class="row">
+  	<div class="col-lg-2">&nbsp;</div>
+  	<div class="col-lg-8">
+  	  <?php $this->partial('views/alert.phtml')?>
+	  <form class="form-addmold" method="post">
+	    <h2 class="form-addmold-heading">Date matrita</h2>
+
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <tbody>
+		      <tr>
+		        <td>Denumier reper:</td>
+		        <td><input type="text" class="form-control input-sm" name="denumire_reper" value="<?= $this->mold['denumire_reper']?>"></td>
+		        <td>Material:</td>
+		        <td>
+          			<select class="form-control" id="material" name="material">
+        			<?php foreach ($this->materials as $key => $material):?>
+        				<?php $sel = ($material['id'] == $this->mold['material']) ? 'selected' : '';?>
+        				<option <?= $sel?> value="<?= $material['id']?>"><?= $material['name']?></option>
+        			<?php endforeach?>
+              		</select>
+		        </td>
+		      </tr>
+		      <tr>
+		        <td>Cod reper:</td>
+		        <td> <input type="text" class="form-control input-sm" name="cod_reper" value="<?= $this->mold['cod_reper']?>"> </td>
+		        <td>Cantitate:</td>
+		        <td>
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="cantitate" value="<?= $this->mold['cantitate']?>">
+			        	<span class="input-group-addon ml-1">buc/mc</span>
+		        	</div>
+	        	</td>
+		      </tr>
+		      <tr>
+		        <td>Cod matrita:</td>
+		        <td> <input type="text" class="form-control input-sm" name="cod_matrita" value="<?= $this->mold['cod_matrita']?>"> </td>
+		        <td>Ciclu inj PP:</td>
+		        <td>
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="ciclu_inj" value="<?= $this->mold['ciclu_inj']?>">
+			        	<span class="input-group-addon ml-1">sec</span>
+		        	</div>
+		        </td>
+		      </tr>
+		      <tr>
+		        <td>Nr. de cuiburi:</td>
+		        <td><input type="text" class="form-control input-sm" name="nr_cuiburi" value="<?= $this->mold['nr_cuiburi']?>"></td>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Greutate culee[g]:</td>
+		        <td><input type="text" class="form-control input-sm" name="greutate_culee" value="<?= $this->mold['greutate_culee']?>"></td>
+		        <td colspan="2">&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Greutate reper fara culee[g]:</td>
+		        <td><input type="text" class="form-control input-sm" name="greutate_fara_cule" value="<?= $this->mold['greutate_fara_cule']?>"></td>
+		        <td>Dim. matrita [h x l x L]:</td>
+		        <td>&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td>Dimensiuni reper [mm x mm]:</td>
+		        <td><input type="text" class="form-control input-sm" name="dimensiuni_reper" value="<?= $this->mold['dimensiuni_reper']?>"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="dim_matrita_h" value="<?= $this->mold['dim_matrita_h']?>">
+			        	<span class="input-group-addon ml-1">h</span>
+		        	</div>
+		        </td>
+		      </tr>
+		      <tr>
+		        <td>Numar rezistente</td>
+		        <td><input type="text" class="form-control input-sm" name="numar_rezistente" value="<?= $this->mold['numar_rezistente']?>"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+		        		<input type="text" class="form-control input-sm" name="dim_matrita_lat" value="<?= $this->mold['dim_matrita_lat']?>">
+		        		<span class="input-group-addon ml-1">l</span>
+		        	</td>
+		      </tr>
+		      <tr>
+		        <td>Diametru inel de centrare:</td>
+		        <td><input type="text" class="form-control input-sm" name="diametru_inel_centrare" value="<?= $this->mold['diametru_inel_centrare']?>"></td>
+		        <td colspan="2">
+		        	<div class="input-group">
+		        		<input type="text" class="form-control input-sm" name="dim_matrita_lung" value="<?= $this->mold['dim_matrita_lung']?>">
+		        		<span class="input-group-addon ml-1">L</span>
+		        	</td>
+		      </tr>
+		    </tbody>
+		  </table>
+	  	</div>
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <tbody>
+		      <tr>
+		        <td><b>Pregatire matrita:</b>
+		        	<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('ungere coloane', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="ungere coloane">
+					    ungere coloane
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('modif. poanson data', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="modif. poanson data">
+					    modif. poanson data
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('modif. poanson material', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="modif. poanson material">
+					    modif. poanson material
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('verificat duza calda', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat duza calda">
+					    verificat duza calda
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('verificat functionare bacuri', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat functionare bacuri">
+					    verificat functionare bacuri
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('verificat pozitie bacuri', $this->mold['pregatire_matrita'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat pozitie bacuri">
+					    verificat pozitie bacuri
+					  </label>
+					</div>
+		        </td>
+		        <td>&nbsp;</td>
+		      </tr>
+		      <tr>
+		        <td><b>Demontare matrita de pe masina:</b>
+		        	<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('verificat ultima injectie', $this->mold['demontare_matrita_masina'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="verificat ultima injectie">
+					    verificat ultima injectie
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('verificat pozitie bacuri', $this->mold['demontare_matrita_masina'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="verificat pozitie bacuri">
+					    verificat pozitie bacuri
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('suflat aer comprimat', $this->mold['demontare_matrita_masina'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="suflat aer comprimat">
+					    suflat aer comprimat
+					  </label>
+					</div>
+					<div class="form-check">
+					  <label class="form-check-label">
+					  	<?php $chk = (in_array('conservat matrit', $this->mold['demontare_matrita_masina'])) ? 'checked' : '';?>
+					    <input <?= $chk?> type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="conservat matrit">
+					    conservat matrit
+					  </label>
+					</div>
+		        </td>
+		        <td><b><u>Observatii</u></b><br>
+		        	<div class="form-group">
+						<textarea class="form-control" name="observatii" rows="4" cols="50"><?= $this->mold['observatii']?></textarea>
+					</div>
+				</td>
+		      </tr>
+	      	</tbody>
+		  </table>
+	    </div>
+	    <div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+		    <thead class="thead-light">
+		      <tr>
+		        <th rowspan="2"">Rezistente</th>
+		        <th rowspan="2">Cuiburi</th>
+		        <th colspan="2" rowspan="2">Legaturi rezistente</th>
+		        <th colspan="2">legaturi sonde</th>
+		      </tr>
+		      <tr>
+		        <th>+</th>
+		        <th>-</th>
+	          </tr>
+	  	    </thead>
+	  	    <tbody>
+	      	  <tr>
+	      	  	<td>1</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib1" value="<?= $this->mold['cuib1']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a1" value="<?= $this->mold['legaturi_rezistente_a1']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b1" value="<?= $this->mold['legaturi_rezistente_b1']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a1" value="<?= $this->mold['legaturi_sonde_a1']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b1" value="<?= $this->mold['legaturi_sonde_b1']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>2</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib2" value="<?= $this->mold['cuib2']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a2" value="<?= $this->mold['legaturi_rezistente_a2']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b2" value="<?= $this->mold['legaturi_rezistente_b2']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a2" value="<?= $this->mold['legaturi_sonde_a2']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b2" value="<?= $this->mold['legaturi_sonde_b2']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>3</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib3" value="<?= $this->mold['cuib3']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a3" value="<?= $this->mold['legaturi_rezistente_a3']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b3" value="<?= $this->mold['legaturi_rezistente_b3']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a3" value="<?= $this->mold['legaturi_sonde_a3']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b3" value="<?= $this->mold['legaturi_sonde_b3']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>4</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib4" value="<?= $this->mold['cuib4']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a4" value="<?= $this->mold['legaturi_rezistente_a4']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b4" value="<?= $this->mold['legaturi_rezistente_b4']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a4" value="<?= $this->mold['legaturi_sonde_a4']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b4" value="<?= $this->mold['legaturi_sonde_b4']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>5</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib5" value="<?= $this->mold['cuib5']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a5" value="<?= $this->mold['legaturi_rezistente_a5']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b5" value="<?= $this->mold['legaturi_rezistente_b5']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a5" value="<?= $this->mold['legaturi_sonde_a5']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b5" value="<?= $this->mold['legaturi_sonde_b5']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>6</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib6" value="<?= $this->mold['cuib6']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a6" value="<?= $this->mold['legaturi_rezistente_a6']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b6" value="<?= $this->mold['legaturi_rezistente_b6']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a6" value="<?= $this->mold['legaturi_sonde_a6']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b6" value="<?= $this->mold['legaturi_sonde_b6']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>7</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib7" value="<?= $this->mold['cuib7']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a7" value="<?= $this->mold['legaturi_rezistente_a7']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b7" value="<?= $this->mold['legaturi_rezistente_b7']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a7" value="<?= $this->mold['legaturi_sonde_a7']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b7" value="<?= $this->mold['legaturi_sonde_b7']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>8</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib8" value="<?= $this->mold['cuib8']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a8" value="<?= $this->mold['legaturi_rezistente_a8']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b8" value="<?= $this->mold['legaturi_rezistente_b8']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a8" value="<?= $this->mold['legaturi_sonde_a8']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b8" value="<?= $this->mold['legaturi_sonde_b8']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>9</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib9" value="<?= $this->mold['cuib9']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a9" value="<?= $this->mold['legaturi_rezistente_a9']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b9" value="<?= $this->mold['legaturi_rezistente_b9']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a9" value="<?= $this->mold['legaturi_sonde_a9']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b9" value="<?= $this->mold['legaturi_sonde_b9']?>"></td>
+	      	  </tr>
+	      	  <tr>
+	      	  	<td>10</td>
+	      	  	<td><input type="text" class="form-control input-sm" name="cuib10" value="<?= $this->mold['cuib10']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_a10" value="<?= $this->mold['legaturi_rezistente_a10']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_rezistente_b10" value="<?= $this->mold['legaturi_rezistente_b10']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_a10" value="<?= $this->mold['legaturi_sonde_a10']?>"></td>
+	      	  	<td><input type="text" class="form-control input-sm" name="legaturi_sonde_b10" value="<?= $this->mold['legaturi_sonde_b10']?>"></td>
+	      	  </tr>
+	      	</tbody>
+		  </table>
+		</div>
+		<div class="table-responsive rounded">
+	      <table class="table table-hover table-bordered table-light">
+	      	<thead class="thead-light">
+	      		<tr>
+	      			<th>Nr.</th>
+	      			<th>Nume</th>
+	      			<th>TC</th>
+	      			<th>buc</th>
+	      			<th>&nbsp;</th>
+      			</tr>
+	      	</thead>
+		    <tbody id="component-container">
+		      <tr>
+		      	<td>1</td>
+				<td><input type="text" class="form-control input-sm" name="component_name[]"></td>
+				<td><input type="text" class="form-control input-sm" name="component_tc[]"></td>
+				<td><input type="text" class="form-control input-sm" name="component_buc[]"></td>
+				<td>
+					<button type="button" id="add-component" class="btn btn-info btn-sm">+</button>
+				</td>
+	  	  	  </tr>
+	      	</tbody>
+		  </table>
+		</div>
+	    <button class="btn btn-lg btn-primary btn-block w-25 float-right" type="submit">Salveaza</button>
+	  </form>
+	</div>
+	</div>
+	<div class="col-lg-2">&nbsp;</div>
+  </div>
+</div>
