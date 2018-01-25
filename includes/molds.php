@@ -419,7 +419,7 @@ class Molds {
 		if(isset($_FILES['moldFile']['tmp_name']) && !empty($_FILES['moldFile']['tmp_name'])) {
 			$uploadOk = TRUE;
 			$imageFileType = strtolower(pathinfo(basename($_FILES['moldFile']['name']), PATHINFO_EXTENSION));
-			$target_file = "uploads/{id}.{$imageFileType}";
+			$target_file = __DIR__ . "/uploads/{$id}.{$imageFileType}";
 
 			// Allow certain file formats
 			$allowed = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
