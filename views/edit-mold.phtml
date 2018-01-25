@@ -3,7 +3,7 @@
   	<div class="col-lg-2">&nbsp;</div>
   	<div class="col-lg-8">
   	  <?php $this->partial('views/alert.phtml')?>
-	  <form class="form-addmold" method="post">
+	  <form class="form-addmold" method="post" enctype="multipart/form-data">
 	    <h2 class="form-addmold-heading">Date matrita</h2>
 
 		<div class="table-responsive rounded">
@@ -11,7 +11,7 @@
 		    <tbody>
 		      <tr>
 		        <td>Denumier reper:</td>
-		        <td><input type="text" class="form-control input-sm" name="denumire_reper" value="<?= $this->mold['denumire_reper']?>"></td>
+		        <td><input type="text" class="form-control input-sm" name="denumire_reper" value="<?= $this->mold['denumire_reper']?>" required></td>
 		        <td>Material:</td>
 		        <td>
           			<select class="form-control" id="material" name="material">
@@ -28,7 +28,7 @@
 		        <td>Cantitate:</td>
 		        <td>
 		        	<div class="input-group">
-			        	<input type="text" class="form-control input-sm" name="cantitate" value="<?= $this->mold['cantitate']?>">
+			        	<input type="text" class="form-control input-sm" name="cantitate" value="<?= $this->mold['cantitate']?>" required>
 			        	<span class="input-group-addon ml-1">buc/mc</span>
 		        	</div>
 	        	</td>
@@ -139,7 +139,9 @@
 					  </label>
 					</div>
 		        </td>
-		        <td>&nbsp;</td>
+		        <td>
+		        	<input type="file" name="moldFile" id="moldFile">
+		        </td>
 		      </tr>
 		      <tr>
 		        <td><b>Demontare matrita de pe masina:</b>
@@ -290,14 +292,28 @@
 	      			<th>&nbsp;</th>
       			</tr>
 	      	</thead>
-		    <tbody id="component-container">
+		    <tbody>
+	    	<?php foreach ($this->mold['components'] as $key => $value):?>
+	    		<?php $component_index = $key + 1; ?>
+    		  <tr id="row-<?= $component_index?>">
+		      	<td><?= $component_index?></td>
+				<td><input type="text" class="form-control input-sm" name="component_name[]" value="<?= $value['name']?>"></td>
+				<td><input type="text" class="form-control input-sm" name="component_tc[]" value="<?= $value['tc']?>"></td>
+				<td><input type="text" class="form-control input-sm" name="component_buc[]" value="<?= $value['buc']?>"></td>
+				<td>
+					<button type="button" onclick="removeRow(<?= $component_index?>)" class="btn btn-danger btn-sm">-</button>
+				</td>
+	  	  	  </tr>
+    		<?php endforeach?>
+    		</tbody>
+    		<tbody id="component-container">
 		      <tr>
 		      	<td>1</td>
 				<td><input type="text" class="form-control input-sm" name="component_name[]"></td>
 				<td><input type="text" class="form-control input-sm" name="component_tc[]"></td>
 				<td><input type="text" class="form-control input-sm" name="component_buc[]"></td>
 				<td>
-					<button type="button" id="add-component" class="btn btn-info btn-sm">+</button>
+					<button type="button" data-last-index="<?= $component_index?>" id="update-component" class="btn btn-info btn-sm">+</button>
 				</td>
 	  	  	  </tr>
 	      	</tbody>
