@@ -1,6 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-lg-2">
+      <!-- Filtre -->
       <div class="card bg-dark">
         <div class="card-body">
            <form method="get">
@@ -9,14 +10,14 @@
               <input type="text" class="form-control" id="denumire_reper" name="denumire_reper" placeholder="Produs">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="cod_reper" name="cod_reper" placeholder="Cod produs">
+              <input type="text" class="form-control" id="cod_matrita" name="cod_matrita" placeholder="Cod produs">
             </div>
             <div class="form-group">
               <label for="material" class="text-white">Material:</label>
               <select class="form-control" id="material" name="material" multiple>
-			  <?php foreach ($this->materials as $key => $material):?>
-				<option value="<?= $material['id']?>"><?= $material['name']?></option>
-				<?php endforeach?>
+        			  <?php foreach ($this->materials as $key => $material):?>
+        				<option value="<?= $material['id']?>"><?= $material['name']?></option>
+        				<?php endforeach?>
               </select>
             </div>
             <div class="form-group">
@@ -38,364 +39,188 @@
           </form> 
         </div>
       </div>
+      <!-- EOF Filtre -->
     </div>
     <div class="col-lg-8">
+      <!-- Messaje -->
+      <?php $this->partial('views/alert.phtml')?>
+      <!-- Produse -->
+      <?php foreach ($this->molds as $mold):?>
       <div class="table-responsive rounded">
         <table class="table table-hover table-bordered table-light">
           <thead class="thead-light">
             <tr>
               <th>Produs</th>
-              <th colspan="4">Ralu Flow #2</th>
+              <th colspan="4"><a href="<?= BASE_PATH?>/edit-mold/<?= $mold['id']?>"><?= $mold['denumire_reper']?></a></th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Cod produs</td>
-              <td>76618536015</td>
+              <td><?= $mold['cod_matrita']?></td>
               <td>&nbsp;</td>
               <td>Kg/mc</td>
               <td>g/buc</td>
             </tr>
             <tr>
               <td>Material</td>
-              <td>PP</td>
-              <td>PP</td>
+              <td><?= $mold['material']['name']?></td>
+            <?php 
+            if (isset($this->materials[0])):
+              $materialName = $this->materials[0]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
-              <td>1.67</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Greutate  Kg/mc</td>
-              <td>55</td>
-              <td>PP GF</td>
-              <td>66</td>
-              <td>2.00</td>
+              <td><?= round($mold['greutate'])?></td>
+            <?php 
+              if (isset($this->materials[1])):
+                $materialName = $this->materials[1]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Productie 24h</td>
-              <td>1.2</td>
-              <td>PES</td>
-              <td>101.75</td>
-              <td>3.08</td>
+              <td class="bg-warning">1.2</td>
+            <?php 
+            if (isset($this->materials[2])):
+              $materialName = $this->materials[2]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Greutate /buc</td>
-              <td>1.67</td>
-              <td>PPS</td>
-              <td>99</td>
-              <td>3.00</td>
+              <td><?= $mold['greutate_fara_cule']?></td>
+            <?php 
+            if (isset($this->materials[3])):
+              $materialName = $this->materials[3]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>TimpInjectie [sec]</td>
-              <td>1.92</td>
-              <td>PVDF</td>
-              <td>110</td>
-              <td>3.33</td>
+              <td><?= $mold['ciclu_inj']?></td>
+            <?php 
+            if (isset($this->materials[4])):
+              $materialName = $this->materials[4]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
-              <td>MasinaTip</td>
+              <td>Masina tip</td>
+              <td><?= $mold['cod_reper']?></td>
+            <?php 
+            if (isset($this->materials[5])):
+              $materialName = $this->materials[5]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
-              <td>FEP</td>
-              <td>132</td>
-              <td>4.00</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Buc/mc</td>
-              <td>33000</td>
-              <td>PFA</td>
-              <td>132</td>
-              <td>4.00</td>
+              <td><?= $mold['cantitate']?></td>
+            <?php 
+            if (isset($this->materials[6])):
+              $materialName = $this->materials[6]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Nr Matrita</td>
+              <td class="bg-warning">&nbsp;</td>
+            <?php 
+            if (isset($this->materials[7])):
+              $materialName = $this->materials[7]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
-              <td>E-CTFE</td>
-              <td>108.35</td>
-              <td>3.28</td>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
             <tr>
               <td>Nr cuiburi/matrita</td>
-              <td>6</td>
-              <td>E-TFE</td>
-              <td>121</td>
-              <td>3.67</td>
-            </tr>
-            <tr>
+              <td><?= $mold['nr_cuiburi']?></td>
+            <?php 
+            if (isset($this->materials[8])):
+              $materialName = $this->materials[8]['name']
+            ?>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            <?php else:?>
               <td>&nbsp;</td>
               <td>&nbsp;</td>
-              <td>NDPE</td>
-              <td>60.5</td>
-              <td>1.83</td>
+              <td>&nbsp;</td>
+            <?php endif?>
             </tr>
+            <?php for ($i = 9; $i < $this->materialsCount; $i++):?>
+              <?php $materialName = $this->materials[$i]['name']?>
+              <tr>
+              <td>&nbsp;</td>
+              <td>&nbsp;</td>
+              <td><?= $materialName?></td>
+              <td><?= $mold['materials'][$materialName]['kgmc']?></td>
+              <td><?= $mold['materials'][$materialName]['gbuc']?></td>
+            </tr>
+            <?php endfor?>
           </tbody>
         </table>
       </div>
-      <div class="table-responsive rounded">
-        <table class="table table-hover table-bordered table-light">
-          <thead class="thead-light">
-            <tr>
-              <th>Produs</th>
-              <th colspan="4">Ralu Flow #2</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Cod produs</td>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>Kg/mc</td>
-              <td>g/buc</td>
-            </tr>
-            <tr>
-              <td>Material</td>
-              <td>PP</td>
-              <td>PP</td>
-              <td>&nbsp;</td>
-              <td>1.67</td>
-            </tr>
-            <tr>
-              <td>Greutate  Kg/mc</td>
-              <td>55</td>
-              <td>PP GF</td>
-              <td>66</td>
-              <td>2.00</td>
-            </tr>
-            <tr>
-              <td>Productie 24h</td>
-              <td>1.2</td>
-              <td>PES</td>
-              <td>101.75</td>
-              <td>3.08</td>
-            </tr>
-            <tr>
-              <td>Greutate /buc</td>
-              <td>1.67</td>
-              <td>PPS</td>
-              <td>99</td>
-              <td>3.00</td>
-            </tr>
-            <tr>
-              <td>TimpInjectie [sec]</td>
-              <td>1.92</td>
-              <td>PVDF</td>
-              <td>110</td>
-              <td>3.33</td>
-            </tr>
-            <tr>
-              <td>MasinaTip</td>
-              <td>&nbsp;</td>
-              <td>FEP</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Buc/mc</td>
-              <td>33000</td>
-              <td>PFA</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Nr Matrita</td>
-              <td>&nbsp;</td>
-              <td>E-CTFE</td>
-              <td>108.35</td>
-              <td>3.28</td>
-            </tr>
-            <tr>
-              <td>Nr cuiburi/matrita</td>
-              <td>6</td>
-              <td>E-TFE</td>
-              <td>121</td>
-              <td>3.67</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>NDPE</td>
-              <td>60.5</td>
-              <td>1.83</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-responsive rounded">
-        <table class="table table-hover table-bordered table-light">
-          <thead class="thead-light">
-            <tr>
-              <th>Produs</th>
-              <th colspan="4">Ralu Flow #2</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Produs</td>
-              <td>Ralu Flow #2</td>
-              <td>&nbsp;</td>
-              <td>Kg/mc</td>
-              <td>g/buc</td>
-            </tr>
-            <tr>
-              <td>Material</td>
-              <td>PP</td>
-              <td>PP</td>
-              <td>&nbsp;</td>
-              <td>1.67</td>
-            </tr>
-            <tr>
-              <td>Greutate  Kg/mc</td>
-              <td>55</td>
-              <td>PP GF</td>
-              <td>66</td>
-              <td>2.00</td>
-            </tr>
-            <tr>
-              <td>Productie 24h</td>
-              <td>1.2</td>
-              <td>PES</td>
-              <td>101.75</td>
-              <td>3.08</td>
-            </tr>
-            <tr>
-              <td>Greutate /buc</td>
-              <td>1.67</td>
-              <td>PPS</td>
-              <td>99</td>
-              <td>3.00</td>
-            </tr>
-            <tr>
-              <td>TimpInjectie [sec]</td>
-              <td>1.92</td>
-              <td>PVDF</td>
-              <td>110</td>
-              <td>3.33</td>
-            </tr>
-            <tr>
-              <td>MasinaTip</td>
-              <td>&nbsp;</td>
-              <td>FEP</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Buc/mc</td>
-              <td>33000</td>
-              <td>PFA</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Nr Matrita</td>
-              <td>&nbsp;</td>
-              <td>E-CTFE</td>
-              <td>108.35</td>
-              <td>3.28</td>
-            </tr>
-            <tr>
-              <td>Nr cuiburi/matrita</td>
-              <td>6</td>
-              <td>E-TFE</td>
-              <td>121</td>
-              <td>3.67</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>NDPE</td>
-              <td>60.5</td>
-              <td>1.83</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="table-responsive rounded">
-        <table class="table table-hover table-bordered table-light">
-          <thead class="thead-light">
-            <tr>
-              <th>Produs</th>
-              <th colspan="4">Ralu Flow #2</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Produs</td>
-              <td>Ralu Flow #2</td>
-              <td>&nbsp;</td>
-              <td>Kg/mc</td>
-              <td>g/buc</td>
-            </tr>
-            <tr>
-              <td>Material</td>
-              <td>PP</td>
-              <td>PP</td>
-              <td>&nbsp;</td>
-              <td>1.67</td>
-            </tr>
-            <tr>
-              <td>Greutate  Kg/mc</td>
-              <td>55</td>
-              <td>PP GF</td>
-              <td>66</td>
-              <td>2.00</td>
-            </tr>
-            <tr>
-              <td>Productie 24h</td>
-              <td>1.2</td>
-              <td>PES</td>
-              <td>101.75</td>
-              <td>3.08</td>
-            </tr>
-            <tr>
-              <td>Greutate /buc</td>
-              <td>1.67</td>
-              <td>PPS</td>
-              <td>99</td>
-              <td>3.00</td>
-            </tr>
-            <tr>
-              <td>TimpInjectie [sec]</td>
-              <td>1.92</td>
-              <td>PVDF</td>
-              <td>110</td>
-              <td>3.33</td>
-            </tr>
-            <tr>
-              <td>MasinaTip</td>
-              <td>&nbsp;</td>
-              <td>FEP</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Buc/mc</td>
-              <td>33000</td>
-              <td>PFA</td>
-              <td>132</td>
-              <td>4.00</td>
-            </tr>
-            <tr>
-              <td>Nr Matrita</td>
-              <td>&nbsp;</td>
-              <td>E-CTFE</td>
-              <td>108.35</td>
-              <td>3.28</td>
-            </tr>
-            <tr>
-              <td>Nr cuiburi/matrita</td>
-              <td>6</td>
-              <td>E-TFE</td>
-              <td>121</td>
-              <td>3.67</td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td>&nbsp;</td>
-              <td>NDPE</td>
-              <td>60.5</td>
-              <td>1.83</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <?php endforeach?>
+      <!-- EOF Produse -->
     </div>
     <div class="col-lg-2">&nbsp;</div>
   </div>

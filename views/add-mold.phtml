@@ -10,20 +10,37 @@
 		    <tbody>
 		      <tr>
 		        <td>Denumier reper:</td>
-		        <td><b><input type="text" class="form-control input-sm" name="denumire_reper"></b></td>
-		        <td colspan="2">&nbsp;</td>
+		        <td><input type="text" class="form-control input-sm" name="denumire_reper"></td>
+		        <td>Material:</td>
+		        <td>
+          			<select class="form-control" id="material" name="material">
+        			<?php foreach ($this->materials as $key => $material):?>
+        				<option value="<?= $material['id']?>"><?= $material['name']?></option>
+        			<?php endforeach?>
+              		</select>
+		        </td>
 		      </tr>
 		      <tr>
 		        <td>Cod reper:</td>
 		        <td> <input type="text" class="form-control input-sm" name="cod_reper"> </td>
 		        <td>Cantitate:</td>
-		        <td><input type="text" class="form-control input-sm" name="cantitate"> buc/mc</td>
+		        <td>
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="cantitate">
+			        	<span class="input-group-addon ml-1">buc/mc</span>
+		        	</div>
+	        	</td>
 		      </tr>
 		      <tr>
 		        <td>Cod matrita:</td>
 		        <td> <input type="text" class="form-control input-sm" name="cod_matrita"> </td>
 		        <td>Ciclu inj PP:</td>
-		        <td><input type="text" class="form-control input-sm" name="ciclu_inj"> sec</td>
+		        <td>
+		        	<div class="input-group">
+			        	<input type="text" class="form-control input-sm" name="ciclu_inj">
+			        	<span class="input-group-addon ml-1">sec</span>
+		        	</div>
+		        </td>
 		      </tr>
 		      <tr>
 		        <td>Nr. de cuiburi:</td>
@@ -77,40 +94,70 @@
 		    <tbody>
 		      <tr>
 		        <td><b>Pregatire matrita:</b>
-		        	<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> ungere coloane</label>
+		        	<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="ungere coloane">
+					    ungere coloane
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> modif. poanson data</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="modif. poanson data">
+					    modif. poanson data
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> modif. poanson material</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="modif. poanson material">
+					    modif. poanson material
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> verificat duza calda</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat duza calda">
+					    verificat duza calda
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> verificat functionare bacuri</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat functionare bacuri">
+					    verificat functionare bacuri
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="pregatire_matrita"> verificat pozitie bacuri</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="pregatire_matrita[]" class="form-check-input" value="verificat pozitie bacuri">
+					    verificat pozitie bacuri
+					  </label>
 					</div>
 		        </td>
 		        <td>&nbsp;</td>
 		      </tr>
 		      <tr>
 		        <td><b>Demontare matrita de pe masina:</b>
-		        	<div class="radio">
-					  <label><input type="radio" name="demontare_matrita_masina"> Verificat ultima injectie</label>
+		        	<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="verificat ultima injectie">
+					    verificat ultima injectie
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="demontare_matrita_masina"> verificat pozitie bacuri</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="verificat pozitie bacuri">
+					    verificat pozitie bacuri
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="demontare_matrita_masina"> suflat aer comprimat</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="suflat aer comprimat">
+					    suflat aer comprimat
+					  </label>
 					</div>
-					<div class="radio">
-					  <label><input type="radio" name="demontare_matrita_masina"> conservat matrit</label>
+					<div class="form-check">
+					  <label class="form-check-label">
+					    <input type="checkbox" name="demontare_matrita_masina[]" class="form-check-input" value="conservat matrit">
+					    conservat matrit
+					  </label>
 					</div>
 		        </td>
 		        <td><b><u>Observatii</u></b><br>
@@ -222,26 +269,28 @@
 		</div>
 		<div class="table-responsive rounded">
 	      <table class="table table-hover table-bordered table-light">
-		    <tbody>
+	      	<thead class="thead-light">
+	      		<tr>
+	      			<th>Nr.</th>
+	      			<th>Nume</th>
+	      			<th>TC</th>
+	      			<th>buc</th>
+	      			<th>&nbsp;</th>
+      			</tr>
+	      	</thead>
+		    <tbody id="component-container">
 		      <tr>
-				<td>1 Rezistente cuib</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_cuib_tc"> TC</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_cuib_buc"> buc</td>
-	  	  	  </tr>
-	  	  	  <tr>
-				<td>2 Rezistenta centrala</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_centrala_tc"> TC</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_centrala_buc"> buc</td>
-	  	  	  </tr>
-	  	  	  <tr>
-				<td>3 rezistenta bloc</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_bloc_tc"> TC</td>
-				<td><input type="text" class="form-control input-sm" name="rezistenta_bloc_buc"> buc</td>
+		      	<td>1</td>
+				<td><input type="text" class="form-control input-sm" name="component_name[]"></td>
+				<td><input type="text" class="form-control input-sm" name="component_tc[]"></td>
+				<td><input type="text" class="form-control input-sm" name="component_buc[]"></td>
+				<td>
+					<button type="button" id="add-component" class="btn btn-info btn-sm">+</button>
+				</td>
 	  	  	  </tr>
 	      	</tbody>
 		  </table>
 		</div>
-	    <p>inel O 6x2</p>
 	    <button class="btn btn-lg btn-primary btn-block w-25 float-right" type="submit">Salveaza</button>
 	  </form>
 	</div>

@@ -2,7 +2,7 @@
 
 class Materials
 {
-    public function listMaterials(&$service, &$app) 
+    public function listMaterials(&$app) 
     {
         if ($stmt = $app->db->prepare("SELECT * FROM materials")) {
             $stmt->execute();
@@ -14,11 +14,10 @@ class Materials
                 while ($row = $result->fetch_assoc()) {
                     $list[] = $row;
                 }
-
-                $service->materials = $list;
                 
                 $stmt->free_result();
-                unset($list);
+                
+                return $list;
             }
         }
 
@@ -29,9 +28,10 @@ class Materials
     {
         $post = $request->paramsPost();
         $name = $post->name;
+        $factor = $post->factor;
 
-        if ($stmt = $app->db->prepare("INSERT INTO materials (name) VALUES (?)")) {
-            $stmt->bind_param('s', $name);
+        if ($stmt = $app->db->prepare("INSERT INTO materials (name,factor) VALUES (?,?)")) {
+            $stmt->bind_param('sd', $name, $factor);
             $stmt->execute();
             $stmt->close();
 
@@ -41,7 +41,7 @@ class Materials
         return false;
     }
 
-    public function getMaterial($id, &$service, &$app) 
+    public function getMaterial($id, &$app) 
     {
         if ($stmt = $app->db->prepare("SELECT * FROM materials WHERE id = ?")) {
             $stmt->bind_param('i', $id);
@@ -52,11 +52,10 @@ class Materials
                 $item = array();
 
                 if ($item = $result->fetch_assoc()) {
-                    $service->material = $item;    
+                    return $item;    
                 }
                 
                 $stmt->free_result();
-                unset($item);
             }
         }
 
@@ -67,9 +66,10 @@ class Materials
     {
         $post = $request->paramsPost();
         $name = $post->name;
+        $factor = $post->factor;
 
-        if ($stmt = $app->db->prepare("UPDATE materials SET name = ? WHERE id = ?")) {
-            $stmt->bind_param('si', $name, $id);
+        if ($stmt = $app->db->prepare("UPDATE materials SET name = ?, factor = ? WHERE id = ?")) {
+            $stmt->bind_param('ssi', $name, $factor, $id);
             $stmt->execute();
             $stmt->close();
 

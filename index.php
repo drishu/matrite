@@ -45,7 +45,9 @@ $klein->respond(
         } else {
             $service->layout('views/layout-out.phtml');        
         }
-    
+
+        // Any messages ?
+        $service->messages = $service->flashes(); 
     }
 );
 
@@ -55,9 +57,6 @@ $klein->respond(
         if ($app->isLogged) {
             $response->redirect('index');
         }
-        
-        // Any login error ?
-        $service->messages = $service->flashes();
 
         $service->render('views/sign-in.phtml');
     }
@@ -103,16 +102,20 @@ $klein->respond(
         }
 		
 		include_once __DIR__ . '/includes/materials.php';
-		include_once __DIR__ . '/includes/molds.php';
-
         $materials = new Materials();
-        $materials->listMaterials($service, $app);
-		
-		$molds = new Molds();
+        $service->materials = $materials->listMaterials($app);
+        $service->materialsCount = count($service->materials);
+
+        // Load products.
+        include_once __DIR__ . '/includes/molds.php';
+
+        $controller = new Molds();
+        $service->molds = $controller->listMolds($materials, $request, $app);
 		$list = $molds->order($app);
 		echo '<pre>';
 		print_r($list);
 		echo '</pre>';
+
 
         $service->render('views/index.phtml');
     }
@@ -120,20 +123,14 @@ $klein->respond(
 
 // Mold CRUD
 $klein->respond(
-    'GET', '/mold', function ($request, $response, $service, $app) {
-        if (!$app->isLogged) {
-            $response->redirect(BASE_PATH)->send();
-        }
-
-        $service->render('views/mold.phtml');
-    }
-);
-
-$klein->respond(
     'GET', '/add-mold', function ($request, $response, $service, $app) {
         if (!$app->isLogged) {
             $response->redirect(BASE_PATH)->send();
         }
+
+        include_once __DIR__ . '/includes/materials.php';
+        $controller = new Materials();
+        $service->materials = $controller->listMaterials($app);
 
         $service->render('views/add-mold.phtml');
     }
@@ -148,13 +145,72 @@ $klein->respond(
         include_once __DIR__ . '/includes/molds.php';
 
         $controller = new Molds();
-        $result = $controller->addMold($request, $service, $app);
+        $result = $controller->addMold($request, $app);
 
         if ($result) {
-            $response->redirect(BASE_PATH.'/mold')->send();    
+            $service->flash('Matrita a fost adaugata cu succes.', 'alert-success');
+            $response->redirect(BASE_PATH.'/index')->send();
         }
     
         $service->render('views/add-mold.phtml');
+    }
+);
+
+$klein->respond(
+    'GET', '/edit-mold/[i:id]', function ($request, $response, $service, $app) {
+        if (!$app->isLogged) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        $id = $request->param('id', false);
+
+        if (!$id) {
+            $response->redirect(BASE_PATH)->send();    
+        }
+
+        // Load product.
+        include_once __DIR__ . '/includes/molds.php';
+        $controller = new Molds();
+        $service->mold = $controller->getMold($id, $app);
+
+        include_once __DIR__ . '/includes/materials.php';
+        $controller = new Materials();
+        $service->materials = $controller->listMaterials($app);
+
+        $service->render('views/edit-mold.phtml');
+    }
+);
+
+$klein->respond(
+    'POST', '/edit-mold/[i:id]', function ($request, $response, $service, $app) {
+        if (!$app->isLogged) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        $id = $request->param('id', false);
+
+        if (!$id) {
+            $response->redirect(BASE_PATH)->send();    
+        }
+
+        include_once __DIR__ . '/includes/molds.php';
+
+        $controller = new Molds();
+        $result = $controller->updateMold($id, $request, $app);
+
+        if ($result) {
+            $service->flash('Matrita a fost modificata cu succes.', 'alert-success');
+            $service->back();
+        }
+
+        // Load product.
+        $service->mold = $controller->getMold($id, $app);
+
+        include_once __DIR__ . '/includes/materials.php';
+        $materials = new Materials();
+        $service->materials = $materials->listMaterials($app);
+
+        $service->render('views/edit-mold.phtml');
     }
 );
 
@@ -280,7 +336,7 @@ $klein->respond(
         include_once __DIR__ . '/includes/materials.php';
 
         $controller = new Materials();
-        $controller->listMaterials($service, $app);
+        $service->materials = $controller->listMaterials($app);
 
         $service->render('views/materials.phtml');
     }
@@ -330,7 +386,7 @@ $klein->respond(
         include_once __DIR__ . '/includes/materials.php';
 
         $controller = new Materials();
-        $material = $controller->getMaterial($id, $service, $app);
+        $service->material = $controller->getMaterial($id, $app);
     
         $service->render('views/edit-material.phtml');
     }
