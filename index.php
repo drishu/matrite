@@ -112,6 +112,19 @@ $klein->respond(
         $controller = new Molds();
         $service->molds = $controller->listMolds($materials, $request, $app);
 
+        $service->paramsGET = $request->paramsGET();
+        $service->orderby = array(
+            '' => '--Alege--',
+            'greutate' => 'Greutate Kg/mc',
+            'greutate_fara_cule' => 'Greutate /buc',
+            'ciclu_inj' => 'Timp injectie',
+        );
+        $service->sort = array(
+            '' => '--Alege--',
+            'asc' => 'Ascendent',
+            'desc' => 'Descendent',
+        );
+
         $service->render('views/index.phtml');
     }
 );

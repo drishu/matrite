@@ -2,39 +2,43 @@
   <div class="row">
     <div class="col-lg-2">
       <!-- Filtre -->
-      <div class="card bg-dark">
+      <div id="card-filter" class="card bg-dark">
         <div class="card-body">
            <form method="get">
             <h6 class="text-white">Filtreaza dupa</h6>
             <div class="form-group">
-              <input type="text" class="form-control" id="denumire_reper" name="denumire_reper" placeholder="Produs">
+              <input type="text" class="form-control" id="denumire_reper" name="denumire_reper" placeholder="Produs" value="<?= $this->paramsGET['denumire_reper']?>">
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" id="cod_matrita" name="cod_matrita" placeholder="Cod produs">
+              <input type="text" class="form-control" id="cod_matrita" name="cod_matrita" placeholder="Cod produs" value="<?= $this->paramsGET['cod_matrita']?>">
             </div>
             <div class="form-group">
               <label for="material" class="text-white">Material:</label>
               <select class="form-control" id="material" name="material" multiple>
         			  <?php foreach ($this->materials as $key => $material):?>
-        				<option value="<?= $material['id']?>"><?= $material['name']?></option>
+                  <?php $sel = ($this->paramsGET['material'] == $material['id']) ? 'selected' : ''; ?>
+        				<option <?= $sel?> value="<?= $material['id']?>"><?= $material['name']?></option>
         				<?php endforeach?>
               </select>
             </div>
             <div class="form-group">
               <label for="orderby" class="text-white">Ordoneaza dupa</label>
               <select class="form-control" id="orderby" name="orderby">
-                <option>Greutate Kg/mc</option>
-                <option>Productie 24h</option>
-                <option>Greutate /buc</option>
-                <option>TimpInjectie</option>
+                <?php foreach ($this->orderby as $key => $value):?>
+                  <?php $sel = ($this->paramsGET['orderby'] == $key) ? 'selected' : ''; ?>
+                  <option <?= $sel?> value="<?= $key?>"><?= $value?></option>
+                <?php endforeach?>
               </select>
             </div>
             <div class="form-group">
               <select class="form-control" id="sort" name="sort">
-                <option>Ascendent</option>
-                <option>Descendent</option>
+                <?php foreach ($this->sort as $key => $value):?>
+                  <?php $sel = ($this->paramsGET['sort'] == $key) ? 'selected' : ''; ?>
+                  <option <?= $sel?> value="<?= $key?>"><?= $value?></option>
+                <?php endforeach?>
               </select>
             </div>
+            <a href="<?= BASE_PATH?>/index" class="btn btn-secondary">Toate</a>
             <button type="submit" class="btn btn-primary">Filtraza</button>
           </form> 
         </div>
@@ -79,7 +83,7 @@
             <?php endif?>
             </tr>
             <tr>
-              <td>Greutate  Kg/mc</td>
+              <td>Greutate Kg/mc</td>
               <td><?= $mold['greutate']?></td>
             <?php 
               if (isset($this->materials[1])):
@@ -127,7 +131,7 @@
             <?php endif?>
             </tr>
             <tr>
-              <td>TimpInjectie [sec]</td>
+              <td>Timp injectie [sec]</td>
               <td><?= $mold['ciclu_inj']?></td>
             <?php 
             if (isset($this->materials[4])):

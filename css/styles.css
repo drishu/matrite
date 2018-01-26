@@ -2,3 +2,9 @@ body {
   min-height: 75rem;
   padding-top: 4.5rem;
 }
+
+@media (min-width: 1200px) {
+	#card-filter {
+		position : fixed;
+	}
+}

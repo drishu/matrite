@@ -140,7 +140,22 @@
 					</div>
 		        </td>
 		        <td>
-		        	<input type="file" name="moldFile" id="moldFile">
+		        	<div class="m-3 float-left">
+		        		<input type="file" name="moldFile" id="moldFile"><br>
+		        		<small>Doar formatele JPG, JPEG, PNG, GIF, PDF, TXT sunt permise.</small>
+	        		</div>
+	        	<?php if (!empty($this->mold['file']) && is_readable($this->mold['file'])):?>
+	        		
+        			<?php if ($this->mold['file_type'] == 'document'):?>
+    				<div class="m-3 clearfix">
+	        			<a href="<?= BASE_PATH . '/' . $this->mold['file']?>" target="_blank">Vezi fisierul aici</a>
+        			</div>
+        			<?php else:?>
+    				<a href="<?= BASE_PATH . '/' . $this->mold['file']?>" target="_blank">
+        				 <img src="<?= BASE_PATH . '/' . $this->mold['file']?>" class="rounded float-right" height="250"> 
+    				 </a>
+	        		<?php endif?>
+        		<?php endif?>
 		        </td>
 		      </tr>
 		      <tr>

@@ -1,6 +1,8 @@
 <?php
 
 class Molds {
+	private $fileType = '';
+	private $filePath = '';
 	/**
 	 * Add mold data.
 	 */
@@ -117,7 +119,63 @@ class Molds {
      * List all molds.
      */
     public function listMolds(&$controller, &$request, &$app) {
-        if ($stmt = $app->db->prepare("SELECT * FROM molds")) {
+    	$get = $request->paramsGET();
+    	$denumire_reper = $get->denumire_reper;
+    	$cod_matrita = $get->cod_matrita;
+    	$material = $get->material;
+    	$orderby = $get->orderby;
+    	$sort = $get->sort;
+    	$cast = '';
+    	$bind_params = array();
+    	$bind_params[] = &$cast;
+    	$sql = "SELECT * FROM molds WHERE 1 = 1";
+
+    	if (!empty($denumire_reper)) {
+    		$denumire_reper = '%' . $denumire_reper . '%';
+    		$bind_params[] = &$denumire_reper;
+    		$cast .= 's';
+    		$sql .= " AND denumire_reper LIKE ?";
+    	}
+
+    	if (!empty($cod_matrita)) {
+    		$cod_matrita = '%' . $cod_matrita . '%';
+    		$bind_params[] = &$cod_matrita;
+    		$cast .= 's';
+    		$sql .= " AND cod_matrita LIKE ?";
+    	}
+
+    	if (!empty($material)) {
+    		$bind_params[] = &$material;
+    		$cast .= 'i';
+    		$sql .= " AND material = ?";
+    	}
+
+    	if (!empty($orderby) && !empty($sort)) {
+    		switch ($orderby) {
+    			case 'greutate':
+    				$sql .= " ORDER BY greutate";
+    				break;
+				case 'greutate_fara_cule':
+					$sql .= " ORDER BY greutate_fara_cule";
+    				break;
+				case 'ciclu_inj':
+					$sql .= " ORDER BY ciclu_inj";
+    				break;
+    		}
+
+    		if ($sort == 'asc') {
+    			$sql .= " ASC";
+    		} else {
+    			$sql .= " DESC";
+    		}
+    	}
+    	
+
+        if ($stmt = $app->db->prepare($sql)) {
+        	if (!empty($cast)) {
+        		call_user_func_array(array($stmt, 'bind_param'), $bind_params);	
+        	}
+        	
             $stmt->execute();
             $result = $stmt->get_result();
 
@@ -404,9 +462,9 @@ class Molds {
 			}
 
 			// Handle fielupload.
-			if ($targetFile = $this->_handleFileUpload($id, $service)) {
-				if ($stmt = $app->db->prepare("UPDATE molds SET file = ? WHERE id = ?")) {
-					$stmt->bind_param('si', $targetFile, $id);
+			if ($this->_handleFileUpload($id, $service)) {
+				if ($stmt = $app->db->prepare("UPDATE molds SET file = ?, file_type = ? WHERE id = ?")) {
+					$stmt->bind_param('ssi', $this->filePath, $this->fileType, $id);
 					$stmt->execute();
 					$stmt->close();
 				}
@@ -423,14 +481,23 @@ class Molds {
 		if(isset($_FILES['moldFile']['tmp_name']) && !empty($_FILES['moldFile']['tmp_name'])) {
 			$uploadOk = TRUE;
 			$uploadDir = realpath(__DIR__ . '/../uploads');
-			$imageFileType = strtolower(pathinfo(basename($_FILES['moldFile']['name']), PATHINFO_EXTENSION));
-			$targetFile = $uploadDir . "/{$id}.{$imageFileType}";
+			$extension = strtolower(pathinfo(basename($_FILES['moldFile']['name']), PATHINFO_EXTENSION));
+			$targetFile = $uploadDir . "/{$id}.{$extension}";
 
 			// Allow certain file formats
-			$allowed = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
+			$allowed_images = array('jpg', 'jpeg', 'png', 'gif');
+			$allowed_documents = array('pdf', 'txt');
 
-			if(!in_array($imageFileType, $allowed)) {
-			    $service->flash("doar formatele JPG, JPEG, PNG & GIF sunt permise.", 'alert-danger');
+			if (in_array($extension, $allowed_images)) {
+				$this->fileType = 'image';
+			}
+
+			if (in_array($extension, $allowed_documents)) {
+				$this->fileType = 'document';
+			}
+
+			if (empty($this->fileType)) {
+				$service->flash("Doar formatele JPG, JPEG, PNG, GIF, PDF, TXT sunt permise.", 'alert-danger');
 			    $uploadOk = FALSE;
 			}
 
@@ -447,13 +514,15 @@ class Molds {
 			// Check if $uploadOk is set to 0 by an error
 		    if ($uploadOk && move_uploaded_file($_FILES['moldFile']['tmp_name'], $targetFile)) {
 		        $service->flash("Fisierul ". basename($_FILES['moldFile']['name']). " a fost incarcat.", 'alert-success');
-		        return $targetFile;
+		        $this->filePath = "uploads/{$id}.{$extension}";
+
+		        return TRUE;
 		    } else {
 		        $service->flash('Fisierul nu a putut fi incarcat.', 'alert-danger');
 		    }
 		}
 
-		return false;
+		return FALSE;
     }
 
 	public function order(&$app) {
