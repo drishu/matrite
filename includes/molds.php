@@ -428,11 +428,12 @@ class Molds {
 			    $service->flash("doar formatele JPG, JPEG, PNG & GIF sunt permise.", 'alert-danger');
 			    $uploadOk = FALSE;
 			}
+
 			// Check if $uploadOk is set to 0 by an error
 		    if ($uploadOk && move_uploaded_file($_FILES['moldFile']['tmp_name'], $target_file)) {
 		        $service->flash("The file ". basename($_FILES['moldFile']['name']). " has been uploaded.", 'alert-success');
 		    } else {
-		        $service->flash('Fisierul nu a putut fi incarcat.', 'alert-danger');
+		        $service->flash('Fisierul nu a putut fi incarcat, probabil legat de permisiuni.', 'alert-danger');
 		    }
 		}
     }
