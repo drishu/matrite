@@ -393,7 +393,7 @@ class Molds {
 
 			// Insert components.
 			foreach ($component_name as $key => $name) {
-				if ($stmt = $app->db->prepare("INSERT INTO components
+				if (!empty($name) && $stmt = $app->db->prepare("INSERT INTO components
 					(mold_id, name, tc, buc) 
 					VALUES (?, ?, ?, ?)
 				")) {
@@ -404,8 +404,12 @@ class Molds {
 			}
 
 			// Handle fielupload.
-			if ($this->handleFileupload($id, $service)) {
-				// update mold.
+			if ($targetFile = $this->_handleFileUpload($id, $service)) {
+				if ($stmt = $app->db->prepare("UPDATE molds SET file = ? WHERE id = ?")) {
+					$stmt->bind_param('si', $targetFile, $id);
+					$stmt->execute();
+					$stmt->close();
+				}
 			}
 
             return true;
@@ -414,12 +418,13 @@ class Molds {
         return false;
     }
 
-    private function handleFileupload($id, &$service) {
+    private function _handleFileUpload($id, &$service) {
 		// Check if image file is a actual image or fake image
 		if(isset($_FILES['moldFile']['tmp_name']) && !empty($_FILES['moldFile']['tmp_name'])) {
 			$uploadOk = TRUE;
+			$uploadDir = realpath(__DIR__ . '/../uploads');
 			$imageFileType = strtolower(pathinfo(basename($_FILES['moldFile']['name']), PATHINFO_EXTENSION));
-			$target_file = __DIR__ . "/uploads/{$id}.{$imageFileType}";
+			$targetFile = $uploadDir . "/{$id}.{$imageFileType}";
 
 			// Allow certain file formats
 			$allowed = array('jpg', 'jpeg', 'png', 'gif', 'pdf');
@@ -429,13 +434,26 @@ class Molds {
 			    $uploadOk = FALSE;
 			}
 
+			if (!is_readable($_FILES['moldFile']['tmp_name'])) {
+		        $service->flash('Fisierul incarcat nu a putut fi citit.', 'alert-danger');
+		        $uploadOk = FALSE;
+			}
+
+			if (!is_writable($uploadDir)) {
+		        $service->flash('/uploads/ nu poate fi scris.', 'alert-danger');
+		        $uploadOk = FALSE;
+			}
+
 			// Check if $uploadOk is set to 0 by an error
-		    if ($uploadOk && move_uploaded_file($_FILES['moldFile']['tmp_name'], $target_file)) {
-		        $service->flash("The file ". basename($_FILES['moldFile']['name']). " has been uploaded.", 'alert-success');
+		    if ($uploadOk && move_uploaded_file($_FILES['moldFile']['tmp_name'], $targetFile)) {
+		        $service->flash("Fisierul ". basename($_FILES['moldFile']['name']). " a fost incarcat.", 'alert-success');
+		        return $targetFile;
 		    } else {
-		        $service->flash('Fisierul nu a putut fi incarcat, probabil legat de permisiuni.', 'alert-danger');
+		        $service->flash('Fisierul nu a putut fi incarcat.', 'alert-danger');
 		    }
 		}
+
+		return false;
     }
 
 	public function order(&$app) {

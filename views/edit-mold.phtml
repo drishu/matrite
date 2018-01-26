@@ -293,8 +293,12 @@
       			</tr>
 	      	</thead>
 		    <tbody>
-	    	<?php foreach ($this->mold['components'] as $key => $value):?>
-	    		<?php $component_index = $key + 1; ?>
+	    	<?php 
+	    		$component_index = 1;
+
+	    		foreach ($this->mold['components'] as $key => $value):
+	    			$component_index = $key + 1;
+    		 ?>
     		  <tr id="row-<?= $component_index?>">
 		      	<td><?= $component_index?></td>
 				<td><input type="text" class="form-control input-sm" name="component_name[]" value="<?= $value['name']?>"></td>

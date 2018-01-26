@@ -100,7 +100,7 @@ $klein->respond(
         if (!$app->isLogged) {
             $response->redirect(BASE_PATH)->send();
         }
-		
+
 		include_once __DIR__ . '/includes/materials.php';
         $materials = new Materials();
         $service->materials = $materials->listMaterials($app);
@@ -111,11 +111,6 @@ $klein->respond(
 
         $controller = new Molds();
         $service->molds = $controller->listMolds($materials, $request, $app);
-		$list = $molds->order($app);
-		echo '<pre>';
-		print_r($list);
-		echo '</pre>';
-
 
         $service->render('views/index.phtml');
     }
