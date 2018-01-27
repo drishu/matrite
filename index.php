@@ -101,7 +101,7 @@ $klein->respond(
             $response->redirect(BASE_PATH)->send();
         }
 
-		include_once __DIR__ . '/includes/materials.php';
+        include_once __DIR__ . '/includes/materials.php';
         $materials = new Materials();
         $service->materials = $materials->listMaterials($app);
         $service->materialsCount = count($service->materials);

@@ -4,7 +4,7 @@ body {
 }
 
 @media (min-width: 1200px) {
-	#card-filter {
-		position : fixed;
-	}
+    #card-filter {
+        position : fixed;
+    }
 }
