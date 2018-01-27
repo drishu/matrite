@@ -3,10 +3,11 @@
 class Molds {
 	private $fileType = '';
 	private $filePath = '';
+	
 	/**
 	 * Add mold data.
 	 */
-	public function addMold(&$request, &$app) {
+	public function addMold(&$request, &$service, &$app) {
 		$post = $request->paramsPost();
 		$denumire_reper = $post->denumire_reper;
 		$material = $post->material;
@@ -99,7 +100,7 @@ class Molds {
 
 			// Insert components.
 			foreach ($component_name as $key => $name) {
-				if ($stmt = $app->db->prepare("INSERT INTO components
+				if (!empty($name) && $stmt = $app->db->prepare("INSERT INTO components
 					(mold_id, name, tc, buc) 
 					VALUES (?, ?, ?, ?)
 				")) {
@@ -109,7 +110,16 @@ class Molds {
 				}
 			}
 
-            return true;
+			// Handle fielupload.
+			if ($this->_handleFileUpload($id, $service)) {
+				if ($stmt = $app->db->prepare("UPDATE molds SET file = ?, file_type = ? WHERE id = ?")) {
+					$stmt->bind_param('ssi', $this->filePath, $this->fileType, $id);
+					$stmt->execute();
+					$stmt->close();
+				}
+			}
+
+            return $id;
         }
 
         return false;

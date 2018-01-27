@@ -3,9 +3,9 @@
  * Dynamic adjustments.
  */
 
-(function ($) {
-	var component_index = 1;
+var component_index = 1;
 
+(function ($) {
 	// Add a row to the table.
 	$('#add-component').click(function () {
 		component_index++;

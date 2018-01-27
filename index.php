@@ -153,11 +153,11 @@ $klein->respond(
         include_once __DIR__ . '/includes/molds.php';
 
         $controller = new Molds();
-        $result = $controller->addMold($request, $app);
+        $id = $controller->addMold($request, $service, $app);
 
-        if ($result) {
+        if ($id) {
             $service->flash('Matrita a fost adaugata cu succes.', 'alert-success');
-            $response->redirect(BASE_PATH.'/index')->send();
+            $response->redirect(BASE_PATH.'/index#mold-' . $id)->send();
         }
     
         $service->render('views/add-mold.phtml');

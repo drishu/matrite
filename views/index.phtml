@@ -50,7 +50,7 @@
       <?php $this->partial('views/alert.phtml')?>
       <!-- Produse -->
       <?php foreach ($this->molds as $mold):?>
-      <div class="table-responsive rounded">
+      <div id="mold-<?= $mold['id']?>" class="table-responsive rounded">
         <table class="table table-hover table-bordered table-light">
           <thead class="thead-light">
             <tr>

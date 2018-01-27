@@ -2,7 +2,8 @@
   <div class="row">
   	<div class="col-lg-2">&nbsp;</div>
   	<div class="col-lg-8">
-	  <form class="form-addmold" method="post">
+  	  <?php $this->partial('views/alert.phtml')?>
+	  <form class="form-addmold" method="post" enctype="multipart/form-data">
 	    <h2 class="form-addmold-heading">Date matrita</h2>
 
 		<div class="table-responsive rounded">
@@ -131,7 +132,12 @@
 					  </label>
 					</div>
 		        </td>
-		        <td>&nbsp;</td>
+		        <td>
+	        		<div class="m-3 float-left">
+		        		<input type="file" name="moldFile" id="moldFile"><br>
+		        		<small>Doar formatele JPG, JPEG, PNG, GIF, PDF, TXT sunt permise.</small>
+	        		</div>
+		        </td>
 		      </tr>
 		      <tr>
 		        <td><b>Demontare matrita de pe masina:</b>
