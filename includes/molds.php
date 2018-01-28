@@ -553,27 +553,82 @@ class Molds
         return false;
     }
 
-    public function order(&$app) 
-    {
-        $denumire_reper = "%mas%";
-        if ($stmt = $app->db->prepare("SELECT * FROM molds WHERE denumire_reper LIKE ? ORDER BY cod_reper ASC")) {
-            $stmt->bind_param('s', $denumire_reper);
-            $stmt->execute();
-            $result = $stmt->get_result();
+    /**
+     * Delete file from disk and db.
+     */
+    public function deleteFile($id, &$app) {
+        // Is there a mold and file ?
+        if ($mold = $this->getMold($id, $app)) {
+            $file = $mold['file'];
+            unset($mold);
+        } else {
+            return FALSE;
+        }
 
-            if ($result->num_rows > 0) {
-                $list = array();
+        // Delete from db if delete from disk.
+        if (isset($file) && !empty($file) && $this->_deleteFile($file)) {
+            if ($stmt = $app->db->prepare("UPDATE molds SET file = ?, file_type = ? WHERE id = ?")) {
+                // Cannot pass parameter by reference.
+                $empty = '';
+                $stmt->bind_param('ssi', $empty, $empty, $id);
+                $stmt->execute();
+                $stmt->close();
 
-                while ($row = $result->fetch_assoc()) {
-                    $list[] = $row;
-                }
-
-                $stmt->free_result();
-                
-                return $list;
+                return TRUE;
             }
         }
 
-        return false;
+        return FALSE;
+    }
+
+    /**
+     * Deletes a file from uploads folder.
+     */
+    private function _deleteFile($file) {
+        $uploadDir = realpath(__DIR__ . '/../');
+        $file_path = $uploadDir . '/' . $file;
+
+        if (isset($file_path) && is_writable($file_path)) {
+            if (unlink($file_path)) {
+                return TRUE;
+            }
+        }
+
+        return FALSE;
+    }
+
+    /**
+     * Delete mold by id.
+     */
+    public function deleteMold($id, &$app) {
+        // See if mold exists and get its file.
+        if ($mold = $this->getMold($id, $app)) {
+            $file = $mold['file'];
+            unset($mold);
+        } else {
+            return FALSE;
+        }
+
+        // Delete the mold from the database.
+        if ($stmt = $app->db->prepare("DELETE FROM molds WHERE id = ?")) {
+            $stmt->bind_param('i', $id);
+            $stmt->execute();
+            $stmt->close();
+
+            if ($stmt = $app->db->prepare("DELETE FROM components WHERE mold_id = ?")) {
+                $stmt->bind_param('i', $id);
+                $stmt->execute();
+                $stmt->close();
+            }
+
+            // Remove unused file.
+            if (isset($file) && !empty($file)) {
+                $this->_deleteFile($file);
+            }
+
+            return TRUE;
+        }
+
+        return FALSE;
     }
 }

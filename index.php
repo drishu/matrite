@@ -55,7 +55,7 @@ $klein->respond(
 $klein->respond(
     'GET', '/', function ($request, $response, $service, $app) {
         if ($app->isLogged) {
-            $response->redirect('index');
+            $response->redirect('/index')->send();
         }
 
         $service->render('views/sign-in.phtml');
@@ -68,7 +68,7 @@ $klein->respond(
 
         $controller = new Users();
         if ($controller->login($request,  $app)) {
-            $response->redirect('index');
+            $response->redirect('/index')->send();
         } else {
             $service->flash('datele introduse nu sunt corecte.', 'alert-danger');
             $service->back();
@@ -208,6 +208,61 @@ $klein->respond(
 
         if ($result) {
             $service->flash('Matrita a fost modificata cu succes.', 'alert-success');
+        }
+
+        $response->redirect(BASE_PATH . '/edit-mold/' . $id)->send();
+    }
+);
+
+$klein->respond(
+    'GET', '/delete-mold/[i:id]', function ($request, $response, $service, $app) {
+        if (!$app->isLogged) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        $id = $request->param('id', false);
+
+        if (!$id) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        include_once __DIR__ . '/includes/molds.php';
+
+        $controller = new Molds();
+        $result = $controller->deleteMold($id, $app);
+
+        if ($result) {
+            $service->flash('Matrita a fost stearsa.', 'alert-success');
+            $response->redirect(BASE_PATH . '/index')->send();
+        } else {
+            $service->flash('Matrita nu a putut fi stearsa.', 'alert-danger');
+        }
+
+        $response->redirect(BASE_PATH . '/edit-mold/' . $id)->send();
+    }
+);
+
+$klein->respond(
+    'GET', '/delete-file/[i:id]', function ($request, $response, $service, $app) {
+        if (!$app->isLogged) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        $id = $request->param('id', false);
+
+        if (!$id) {
+            $response->redirect(BASE_PATH)->send();
+        }
+
+        include_once __DIR__ . '/includes/molds.php';
+
+        $controller = new Molds();
+        $result = $controller->deleteFile($id, $app);
+
+        if ($result) {
+            $service->flash('Fisierul a fost sters.', 'alert-success');
+        } else {
+            $service->flash('Fisierul nu a putut fi sters.', 'alert-danger');
         }
 
         $response->redirect(BASE_PATH . '/edit-mold/' . $id)->send();

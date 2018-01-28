@@ -77,7 +77,8 @@
 		        	<div class="input-group">
 		        		<input type="text" class="form-control input-sm" name="dim_matrita_lat" value="<?= $this->mold['dim_matrita_lat']?>">
 		        		<span class="input-group-addon ml-1">l</span>
-		        	</td>
+		        	</div>
+	        	</td>
 		      </tr>
 		      <tr>
 		        <td>Diametru inel de centrare:</td>
@@ -86,7 +87,8 @@
 		        	<div class="input-group">
 		        		<input type="text" class="form-control input-sm" name="dim_matrita_lung" value="<?= $this->mold['dim_matrita_lung']?>">
 		        		<span class="input-group-addon ml-1">L</span>
-		        	</td>
+		        	</div>
+	        	</td>
 		      </tr>
 		    </tbody>
 		  </table>
@@ -149,11 +151,13 @@
         			<?php if ($this->mold['file_type'] == 'document'):?>
     				<div class="m-3 clearfix">
 	        			<a href="<?= BASE_PATH . '/' . $this->mold['file']?>" target="_blank">Vezi fisierul aici</a>
+	        			<a class="text-danger" href="<?= BASE_PATH?>/delete-file/<?=$this->mold['id']?>"><small>sterge</small></a>
         			</div>
         			<?php else:?>
     				<a href="<?= BASE_PATH . '/' . $this->mold['file']?>" target="_blank">
         				 <img src="<?= BASE_PATH . '/' . $this->mold['file']?>" class="rounded float-right" height="250"> 
     				 </a>
+    				 <a class="text-danger float-right" href="<?= BASE_PATH?>/delete-file/<?=$this->mold['id']?>"><small>sterge</small></a>
 	        		<?php endif?>
         		<?php endif?>
 		        </td>
@@ -338,7 +342,8 @@
 	      	</tbody>
 		  </table>
 		</div>
-	    <button class="btn btn-lg btn-primary btn-block w-25 float-right" type="submit">Salveaza</button>
+		<a href="<?= BASE_PATH?>/delete-mold/<?= $this->mold['id']?>" class="btn btn-lg btn-danger w-25">Sterge</a>
+	    <button class="btn btn-lg btn-primary w-25 float-right" type="submit">Salveaza</button>
 	  </form>
 	</div>
 	</div>
