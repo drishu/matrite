@@ -55,7 +55,7 @@ $klein->respond(
 $klein->respond(
     'GET', '/', function ($request, $response, $service, $app) {
         if ($app->isLogged) {
-            $response->redirect('/index')->send();
+            $response->redirect(BASE_PATH . '/index')->send();
         }
 
         $service->render('views/sign-in.phtml');
@@ -68,7 +68,7 @@ $klein->respond(
 
         $controller = new Users();
         if ($controller->login($request,  $app)) {
-            $response->redirect('/index')->send();
+            $response->redirect(BASE_PATH . '/index')->send();
         } else {
             $service->flash('datele introduse nu sunt corecte.', 'alert-danger');
             $service->back();
@@ -157,7 +157,7 @@ $klein->respond(
 
         if ($id) {
             $service->flash('Matrita a fost adaugata cu succes.', 'alert-success');
-            $response->redirect(BASE_PATH.'/index#mold-' . $id)->send();
+            $response->redirect(BASE_PATH . '/index#mold-' . $id)->send();
         }
     
         $service->render('views/add-mold.phtml');

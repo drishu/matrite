@@ -6,9 +6,9 @@
 
 if (APPLICATION_ENV == 'production') {
     define("HOST", "localhost");
-    define("USER", "sec_user");
-    define("PASSWORD", "eKcGZr59zAa2BEWU");
-    define("DATABASE", "secure_login");
+    define("USER", "r51890hobb_matrite");
+    define("PASSWORD", "Sibiu=123");
+    define("DATABASE", "r51890hobb_wp223");
 }
 if (APPLICATION_ENV == 'andras') {
     define("HOST", "localhost");
