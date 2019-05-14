@@ -5,6 +5,7 @@
 
 var component_index = 1;
 var test = 2;
+var test2 = 1;
 
 (function ($) {
     // Add a row to the table.
