@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Here we bootstrap the application and route.
+ * Here we bootstrap the application and  route.
  *
  * PHP version 5.6
  */
